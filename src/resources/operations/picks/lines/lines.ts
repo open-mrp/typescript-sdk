@@ -68,12 +68,7 @@ export interface LineUpdateParams {
    * are returned as `null`.
    */
   include?: Array<
-    | 'sales_order_line'
-    | 'sales_order_line.product'
-    | 'quantity'
-    | 'quantity.unit'
-    | 'ordered_quantity'
-    | 'ordered_quantity.unit'
+    'sales_order_line' | 'sales_order_line.product' | 'quantity.unit' | 'ordered_quantity.unit'
   >;
 
   /**

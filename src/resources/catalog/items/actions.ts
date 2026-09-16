@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as CoreAPI from '../../core/core';
 import * as APIKeysAPI from '../../auth/api-keys/api-keys';
+import * as InventoryAPI from './inventory';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 
@@ -217,50 +219,72 @@ export interface ReconcileErrorResult {
   error: string;
 
   /**
-   * Item SKU.
+   * Entity is a polymorphic reference to any resource in the system.
    */
-  sku: string;
+  item: CoreAPI.Entity | null;
+
+  /**
+   * Resource type identifier.
+   */
+  object: 'reconcile_error_result';
 }
 
 /**
  * An item whose on-hand quantity was successfully reconciled.
  *
  * Both quantities are expressed in the item's own base unit, not in the unit
- * submitted with the request.
+ * submitted with the request, and both arrive with that unit resolved.
  */
 export interface ReconciledItemResult {
   /**
-   * Item ID.
+   * Entity is a polymorphic reference to any resource in the system.
    */
-  item_id: string;
+  item: CoreAPI.Entity | null;
 
   /**
-   * Quantity after the reconciliation, as a decimal string.
+   * An amount calculated on demand rather than stored.
+   *
+   * The same shape as a quantity minus the ID, because nothing was written: it is
+   * derived per request, such as a total rolled up across invoiced lines for one
+   * analysis.
    */
-  new_quantity: string;
+  new_quantity: InventoryAPI.ComputedQuantity | null;
 
   /**
-   * Quantity before the reconciliation, as a decimal string.
+   * Resource type identifier.
    */
-  previous_quantity: string;
+  object: 'reconciled_item_result';
 
   /**
-   * Item SKU.
+   * An amount calculated on demand rather than stored.
+   *
+   * The same shape as a quantity minus the ID, because nothing was written: it is
+   * derived per request, such as a total rolled up across invoiced lines for one
+   * analysis.
    */
-  sku: string;
+  previous_quantity: InventoryAPI.ComputedQuantity | null;
 }
 
 /**
  * A submitted row that was skipped rather than reconciled.
+ *
+ * A skipped row is reported by the SKU it was submitted under rather than as an
+ * item reference, because the usual reason to skip one is that no item carries
+ * that SKU — there is nothing to point at.
  */
 export interface SkippedItemResult {
+  /**
+   * Resource type identifier.
+   */
+  object: 'skipped_item_result';
+
   /**
    * Human-readable reason the item was skipped.
    */
   reason: string;
 
   /**
-   * Item SKU.
+   * Item SKU, as submitted.
    */
   sku: string;
 }

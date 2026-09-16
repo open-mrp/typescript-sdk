@@ -205,7 +205,7 @@ export class ProductionSchedules extends APIResource {
    * lines are where that pooling is undone, against each finished SKU's own stock
    * position, its own orders, and the hours the rest of the factory has that week.
    *
-   * Levelled, not merely allocated. Work that does not fit a week moves to the next
+   * Leveled, not merely allocated. Work that does not fit a week moves to the next
    * one rather than being dropped, so the plan never asks the second stage for more
    * hours than it has. Two things bound it, and they are reported separately in the
    * schedule's diagnostics because they call for opposite responses: a SKU held back
@@ -417,7 +417,7 @@ export interface GenerateProductionScheduleRequest {
   /**
    * Human-readable label for the version, such as the week it was cut for.
    *
-   * Purely for recognising the version in a list; versions are numbered
+   * Purely for recognizing the version in a list; versions are numbered
    * automatically and the number is what identifies them.
    */
   name?: string;
@@ -1947,8 +1947,8 @@ export interface ScheduleDiagnostics {
    * introduces.
    *
    * Calibrated from measured production against `average_inputs_added`, so the
-   * modelled changeover lands on the time the floor actually reports rather than on
-   * a fixed allowance.
+   * modeled changeover lands on the time the floor actually reports rather than on a
+   * fixed allowance.
    */
   changeover_slope_minutes: number;
 
@@ -2069,7 +2069,7 @@ export interface ScheduleFinishingDiagnostics {
   greige_starved_skus: Array<string>;
 
   /**
-   * Finished goods with no measured finishing rate, which cannot be levelled because
+   * Finished goods with no measured finishing rate, which cannot be leveled because
    * the hours they cost are unknown.
    */
   items_without_run_rate: Array<string>;
@@ -2252,7 +2252,7 @@ export interface ProductionScheduleCreateParams {
   /**
    * Human-readable label for the version, such as the week it was cut for.
    *
-   * Purely for recognising the version in a list; versions are numbered
+   * Purely for recognizing the version in a list; versions are numbered
    * automatically and the number is what identifies them.
    */
   name?: string;

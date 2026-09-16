@@ -197,7 +197,7 @@ export interface CreateProductionScheduleLineRequest {
    * Machine hours the campaign will take.
    *
    * Left unset, it is estimated from the rate this version was solved with for this
-   * item, so the week's utilisation still reflects the added work. An item the
+   * item, so the week's utilization still reflects the added work. An item the
    * version holds no policy for estimates to zero.
    */
   run_hours?: number;
@@ -271,7 +271,7 @@ export interface ProductionScheduleLine {
   object: 'production_schedule_line';
 
   /**
-   * Modelled changeover time before the campaign.
+   * Modeled changeover time before the campaign.
    */
   planned_changeover_minutes: number;
 
@@ -561,7 +561,7 @@ export interface LineCreateParams {
    * Machine hours the campaign will take.
    *
    * Left unset, it is estimated from the rate this version was solved with for this
-   * item, so the week's utilisation still reflects the added work. An item the
+   * item, so the week's utilization still reflects the added work. An item the
    * version holds no policy for estimates to zero.
    */
   run_hours?: number;

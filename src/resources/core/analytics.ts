@@ -1085,7 +1085,7 @@ export interface OeeDepartment {
   /**
    * Whether availability was measured from logged downtime or estimated from
    * runtime. A department with no logged downtime computes as perfectly available,
-   * so an estimate is labelled rather than presented as a measurement.
+   * so an estimate is labeled rather than presented as a measurement.
    */
   measurement_status: 'measured' | 'estimated';
 
