@@ -1675,6 +1675,10 @@ export interface AuditEventListParams {
 
   /**
    * Restricts results to audit events on or after this timestamp.
+   *
+   * Defaults to 24 hours before `ends_at`, or before now when `ends_at` is also
+   * omitted, unless `resource_ids` or the root resource is given — a record's
+   * history is returned whole. Pass an earlier timestamp to search further back.
    */
   starts_at?: string;
 

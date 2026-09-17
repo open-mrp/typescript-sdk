@@ -209,6 +209,10 @@ export interface InventoryChangeLogListParams {
 
   /**
    * Restricts results to change logs created on or after this timestamp.
+   *
+   * Defaults to 90 days before `ends_at`, or before now when `ends_at` is also
+   * omitted, unless `item_ids` is given — an item's history is returned whole. Pass
+   * an earlier timestamp to search further back.
    */
   starts_at?: string;
 }

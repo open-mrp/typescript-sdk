@@ -26,7 +26,7 @@ export const newMcpServer = async ({
   new McpServer(
     {
       name: 'openmrp_sdk_api',
-      version: '0.24.2',
+      version: '0.24.3',
     },
     {
       instructions: await getInstructions({ stainlessApiKey, customInstructionsPath }),

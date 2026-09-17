@@ -519,6 +519,9 @@ export interface RequestLogListParams {
 
   /**
    * Restricts results to request logs on or after this timestamp.
+   *
+   * Defaults to 24 hours before `ends_at`, or before now when `ends_at` is also
+   * omitted. Pass an earlier timestamp to search further back.
    */
   starts_at?: string;
 
