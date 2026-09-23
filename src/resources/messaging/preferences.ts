@@ -117,6 +117,7 @@ export interface NotificationPreference {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
+    | 'production_run.updated'
     | null;
 
   /**

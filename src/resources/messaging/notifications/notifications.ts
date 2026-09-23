@@ -240,7 +240,8 @@ export interface Notification {
     | 'agent.run_completed'
     | 'agent.alert'
     | 'system.broadcast'
-    | 'customer.registered';
+    | 'customer.registered'
+    | 'production_run.updated';
 
   change_count: number | null;
 
@@ -452,7 +453,8 @@ export interface SendNotificationRequest {
     | 'agent.run_completed'
     | 'agent.alert'
     | 'system.broadcast'
-    | 'customer.registered';
+    | 'customer.registered'
+    | 'production_run.updated';
 
   /**
    * Who a notification is aimed at.
@@ -823,7 +825,8 @@ export interface NotificationCreateParams {
     | 'agent.run_completed'
     | 'agent.alert'
     | 'system.broadcast'
-    | 'customer.registered';
+    | 'customer.registered'
+    | 'production_run.updated';
 
   /**
    * Who a notification is aimed at.
@@ -1192,7 +1195,8 @@ export interface NotificationListParams {
     | 'agent.run_completed'
     | 'agent.alert'
     | 'system.broadcast'
-    | 'customer.registered';
+    | 'customer.registered'
+    | 'production_run.updated';
 
   /**
    * Opaque cursor token identifying where the page of results starts.

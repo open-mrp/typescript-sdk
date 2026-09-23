@@ -102,7 +102,8 @@ export interface Announcement {
     | 'agent.run_completed'
     | 'agent.alert'
     | 'system.broadcast'
-    | 'customer.registered';
+    | 'customer.registered'
+    | 'production_run.updated';
 
   /**
    * Creation timestamp.
