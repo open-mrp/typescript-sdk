@@ -274,8 +274,11 @@ export interface IssueSalesOrderRequest {
    *
    * When `true`, an order acknowledgement email with a PDF of the order is sent to
    * the acknowledgement contacts on the order and the order's
-   * `acknowledgment_status` becomes `sent`. An order with no acknowledgement
-   * contacts sends nothing and leaves its `acknowledgment_status` unchanged.
+   * `acknowledgment_status` becomes `sent`. The email is sent asynchronously, so
+   * `acknowledgment_status` may still read `not_sent` immediately after this call
+   * returns and settles to `sent` once delivery is queued. An order with no
+   * acknowledgement contacts sends nothing and leaves its `acknowledgment_status`
+   * unchanged.
    */
   notify_customer: boolean;
 }
@@ -471,8 +474,11 @@ export interface ActionIssueParams {
    *
    * When `true`, an order acknowledgement email with a PDF of the order is sent to
    * the acknowledgement contacts on the order and the order's
-   * `acknowledgment_status` becomes `sent`. An order with no acknowledgement
-   * contacts sends nothing and leaves its `acknowledgment_status` unchanged.
+   * `acknowledgment_status` becomes `sent`. The email is sent asynchronously, so
+   * `acknowledgment_status` may still read `not_sent` immediately after this call
+   * returns and settles to `sent` once delivery is queued. An order with no
+   * acknowledgement contacts sends nothing and leaves its `acknowledgment_status`
+   * unchanged.
    */
   notify_customer: boolean;
 }
