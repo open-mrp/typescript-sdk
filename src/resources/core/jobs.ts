@@ -243,6 +243,7 @@ export interface Job {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
     | 'schedule_deviation_type'
