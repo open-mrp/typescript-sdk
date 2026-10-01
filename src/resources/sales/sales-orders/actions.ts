@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../../core/resource';
+import * as CoreAPI from '../../core/core';
 import * as BlocksAPI from '../../messaging/blocks';
+import * as APIKeysAPI from '../../auth/api-keys/api-keys';
 import * as SalesOrdersAPI from './sales-orders';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -284,6 +286,33 @@ export interface IssueSalesOrderRequest {
 }
 
 /**
+ * A single page of resources, together with the metadata needed to page through
+ * the rest of the result set.
+ */
+export interface ListProductionRunBatchSummary {
+  /**
+   * Resources in this page.
+   */
+  data: Array<ProductionRunBatchSummary>;
+
+  /**
+   * Resource type identifier.
+   */
+  object: 'list';
+
+  /**
+   * PageInfo describes where the current page sits within a paginated result set and
+   * how to move to the adjacent pages.
+   *
+   * Page a list by following the URLs below rather than assembling cursors yourself.
+   * For a top-level list endpoint the URL repeats the original request's query
+   * string with only the cursor swapped, so following it preserves the same filters,
+   * search term, and page size.
+   */
+  page_info: APIKeysAPI.PageInfo;
+}
+
+/**
  * A production run: the group of shop-floor batches that are executed together,
  * tracked from the first batch scan through to completion.
  */
@@ -297,6 +326,12 @@ export interface ProductionRun {
    * Number of batches currently recorded against this run.
    */
   batch_count: number;
+
+  /**
+   * A single page of resources, together with the metadata needed to page through
+   * the rest of the result set.
+   */
+  batch_summaries: ListProductionRunBatchSummary | null;
 
   /**
    * Time the run finished production.
@@ -345,6 +380,36 @@ export interface ProductionRun {
    * Last-updated timestamp.
    */
   updated_at: string;
+}
+
+/**
+ * The batches of one item, counted in one unit, that a production run holds.
+ */
+export interface ProductionRunBatchSummary {
+  /**
+   * Number of batches in the total.
+   */
+  batch_count: number;
+
+  /**
+   * Entity is a polymorphic reference to any resource in the system.
+   */
+  item: CoreAPI.Entity | null;
+
+  /**
+   * Resource type identifier.
+   */
+  object: 'production_run_batch_summary';
+
+  /**
+   * Total quantity of the batches, as a decimal string.
+   */
+  quantity_value: string;
+
+  /**
+   * Entity is a polymorphic reference to any resource in the system.
+   */
+  unit: CoreAPI.Entity | null;
 }
 
 /**
@@ -553,7 +618,9 @@ export declare namespace Actions {
     type BulkDeleteSalesOrdersRequest as BulkDeleteSalesOrdersRequest,
     type CommitmentQuoteStep as CommitmentQuoteStep,
     type IssueSalesOrderRequest as IssueSalesOrderRequest,
+    type ListProductionRunBatchSummary as ListProductionRunBatchSummary,
     type ProductionRun as ProductionRun,
+    type ProductionRunBatchSummary as ProductionRunBatchSummary,
     type QuoteSalesOrderCommitmentRequest as QuoteSalesOrderCommitmentRequest,
     type QuoteSalesOrderCommitmentResponse as QuoteSalesOrderCommitmentResponse,
     type QuoteSalesOrderFreightResponse as QuoteSalesOrderFreightResponse,

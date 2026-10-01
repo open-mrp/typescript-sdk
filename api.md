@@ -1194,7 +1194,9 @@ Types:
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">BulkDeleteSalesOrdersRequest</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">CommitmentQuoteStep</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">IssueSalesOrderRequest</a></code>
+- <code><a href="./src/resources/sales/sales-orders/actions.ts">ListProductionRunBatchSummary</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">ProductionRun</a></code>
+- <code><a href="./src/resources/sales/sales-orders/actions.ts">ProductionRunBatchSummary</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">QuoteSalesOrderCommitmentRequest</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">QuoteSalesOrderCommitmentResponse</a></code>
 - <code><a href="./src/resources/sales/sales-orders/actions.ts">QuoteSalesOrderFreightResponse</a></code>

@@ -391,6 +391,7 @@ export interface Job {
     | 'user_photo_upload_result'
     | 'user_photo_url'
     | 'batch_lot'
+    | 'production_run_batch_summary'
     | 'check_duplicate_result'
     | 'item_costs'
     | 'item_trends'
