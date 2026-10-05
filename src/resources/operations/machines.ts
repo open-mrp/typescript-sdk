@@ -164,8 +164,10 @@ export interface UpdateMachineRequest {
 
   /**
    * Free-form notes about the machine.
+   *
+   * Send `null` to clear.
    */
-  notes?: string;
+  notes?: string | null;
 
   /**
    * Serial number of the machine.
@@ -186,6 +188,12 @@ export interface MachineListParams {
    * page.
    */
   cursor?: string;
+
+  /**
+   * Sub-objects to expand in the response. When omitted, sub-objects are returned as
+   * `null`.
+   */
+  include?: Array<'department'>;
 
   /**
    * Maximum number of results to return in a single page.
@@ -258,8 +266,10 @@ export interface MachineUpdateParams {
 
   /**
    * Body param: Free-form notes about the machine.
+   *
+   * Send `null` to clear.
    */
-  notes?: string;
+  notes?: string | null;
 
   /**
    * Body param: Serial number of the machine.
