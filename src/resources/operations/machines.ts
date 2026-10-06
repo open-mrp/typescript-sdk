@@ -14,7 +14,8 @@ export class Machines extends APIResource {
    * Returns a paginated list of machines in your account, most recently created
    * first.
    *
-   * The search term matches the machine name.
+   * The search term matches the start of the machine name, and a machine named
+   * exactly the term is listed first.
    *
    * This endpoint requires the permission: `machines:read`.
    *
