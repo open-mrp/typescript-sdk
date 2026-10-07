@@ -41,6 +41,7 @@ export class Lines extends APIResource {
    *   await client.sales.salesOrders.lines.create(
    *     'or_9lqo07quiwyb',
    *     {
+   *       metadata: { foo: 'string' },
    *       product_id: 'pd_07oe0r7adh2w',
    *       product_sku: 'WIDGET-001',
    *       quantity: { value: '10', unit_id: 'un_82bd37dae5po' },
@@ -139,6 +140,16 @@ export class Lines extends APIResource {
  */
 export interface CreateSalesOrderLineRequest {
   /**
+   * Key-value pairs to store on the line for your own references, such as its ID in
+   * another system.
+   *
+   * Up to 50 keys. Keys are up to 40 characters and cannot contain `[` or `]`;
+   * values are strings up to 500 characters, and an empty string is stored as one. A
+   * key sent as `null` is not stored.
+   */
+  metadata: { [key: string]: string };
+
+  /**
    * ID of the product being ordered.
    */
   product_id: string;
@@ -175,6 +186,16 @@ export interface CreateSalesOrderLineRequest {
  * Request to update a sales order line.
  */
 export interface UpdateSalesOrderLineRequest {
+  /**
+   * Key-value pairs to store on the line, merged into the ones it already has.
+   *
+   * Keys left out are kept, so `{}` changes nothing. Setting a key to `null` removes
+   * it; an empty string is stored as a value. Sending `metadata: null` removes every
+   * key. An object holds at most 50 keys. Keys are up to 40 characters and cannot
+   * contain `[` or `]`; values are up to 500 characters.
+   */
+  metadata?: { [key: string]: string } | null;
+
   /**
    * Description recorded on the line.
    */
@@ -215,6 +236,16 @@ export interface UpdateSalesOrderLineRequest {
 export interface LineDeleteResponse {}
 
 export interface LineCreateParams {
+  /**
+   * Body param: Key-value pairs to store on the line for your own references, such
+   * as its ID in another system.
+   *
+   * Up to 50 keys. Keys are up to 40 characters and cannot contain `[` or `]`;
+   * values are strings up to 500 characters, and an empty string is stored as one. A
+   * key sent as `null` is not stored.
+   */
+  metadata: { [key: string]: string };
+
   /**
    * Body param: ID of the product being ordered.
    */
@@ -265,6 +296,17 @@ export interface LineUpdateParams {
    * are returned as `null`.
    */
   include?: Array<'product' | 'quantity_ordered' | 'unit_price' | 'unit_cost' | 'totals'>;
+
+  /**
+   * Body param: Key-value pairs to store on the line, merged into the ones it
+   * already has.
+   *
+   * Keys left out are kept, so `{}` changes nothing. Setting a key to `null` removes
+   * it; an empty string is stored as a value. Sending `metadata: null` removes every
+   * key. An object holds at most 50 keys. Keys are up to 40 characters and cannot
+   * contain `[` or `]`; values are up to 500 characters.
+   */
+  metadata?: { [key: string]: string } | null;
 
   /**
    * Body param: Description recorded on the line.

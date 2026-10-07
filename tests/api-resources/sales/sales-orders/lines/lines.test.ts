@@ -10,6 +10,7 @@ const client = new OpenMRP({
 describe('resource lines', () => {
   test('create: only required params', async () => {
     const responsePromise = client.sales.salesOrders.lines.create('or_9lqo07quiwyb', {
+      metadata: { foo: 'string' },
       product_id: 'pd_07oe0r7adh2w',
       product_sku: 'WIDGET-001',
       quantity: { unit_id: 'un_82bd37dae5po', value: '10' },
@@ -25,6 +26,7 @@ describe('resource lines', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.sales.salesOrders.lines.create('or_9lqo07quiwyb', {
+      metadata: { foo: 'string' },
       product_id: 'pd_07oe0r7adh2w',
       product_sku: 'WIDGET-001',
       quantity: { unit_id: 'un_82bd37dae5po', value: '10' },
@@ -53,6 +55,7 @@ describe('resource lines', () => {
     const response = await client.sales.salesOrders.lines.update('example', {
       id: 'or_9lqo07quiwyb',
       include: ['product'],
+      metadata: { foo: 'string' },
       product_description: 'product_description',
       product_sku: 'product_sku',
       quantity: { unit_id: 'un_82bd37dae5po', value: '20' },
