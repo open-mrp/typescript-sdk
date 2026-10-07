@@ -9,10 +9,7 @@ const client = new OpenMRP({
 
 describe('resource conversations', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.messaging.conversations.create({
-      participant_account_user_ids: ['acus_e5zu8bde0z3h'],
-      type: 'group',
-    });
+    const responsePromise = client.messaging.conversations.create({ type: 'group' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,10 +21,10 @@ describe('resource conversations', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.messaging.conversations.create({
-      participant_account_user_ids: ['acus_e5zu8bde0z3h'],
       type: 'group',
       include: ['assignee'],
       group_id: 'cvgp_wjlypugna7s4',
+      participant_account_user_ids: ['acus_e5zu8bde0z3h'],
       participants: [{ account_user_id: 'acus_e5zu8bde0z3h', role: 'admin' }],
       title: 'Order #1042 — shipping question',
       topic_resource_id: 'or_9lqo07quiwyb',
