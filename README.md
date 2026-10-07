@@ -133,7 +133,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 
 ## Default Headers
 
-We automatically send the `OpenMRP-Version` header set to `1.0.forge-preview.7`.
+We automatically send the `OpenMRP-Version` header set to `1.0.forge-preview.8`.
 
 If you need to, you can override it by setting default headers on a per-request basis.
 
