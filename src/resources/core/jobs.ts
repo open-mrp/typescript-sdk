@@ -380,8 +380,6 @@ export interface Job {
     | 'catalog_product'
     | 'catalog_property'
     | 'catalog_attribute'
-    | 'dc_location'
-    | 'edi_run'
     | 'inventory_item'
     | 'analyze_weeks_of_sales_response'
     | 'bulk_reconcile_items_response'

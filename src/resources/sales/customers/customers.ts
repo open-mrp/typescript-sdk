@@ -102,7 +102,6 @@ export class Customers extends APIResource {
    *   default_priority: 'normal',
    *   default_sales_rep_id: 'acus_e5zu8bde0z3h',
    *   default_service_level_id: 'crop_4ilk9p6gccrx',
-   *   edi_status: 'disabled',
    *   email: 'orders@acme.com',
    *   freight_policy: 'billed_freight',
    *   fulfillment_policy: 'make_to_order',
@@ -143,7 +142,6 @@ export class Customers extends APIResource {
    *   default_sales_rep_id: 'acus_e5zu8bde0z3h',
    *   default_service_level_id: 'crop_4ilk9p6gccrx',
    *   default_shipping_term_id: 'shtm_c5gxy05whw6r',
-   *   edi_status: 'disabled',
    *   email: 'orders@acme.com',
    *   freight_policy: 'billed_freight',
    *   fulfillment_policy: 'make_to_order',
@@ -328,12 +326,6 @@ export interface CreateCustomerRequest {
    * customer's default.
    */
   default_service_level_id?: string;
-
-  /**
-   * Whether EDI (Electronic Data Interchange) is enabled for exchanging orders and
-   * documents with this customer.
-   */
-  edi_status?: 'enabled' | 'disabled';
 
   /**
    * Email address.
@@ -570,12 +562,6 @@ export interface UpdateCustomerRequest {
    * specify one.
    */
   default_shipping_term_id?: string;
-
-  /**
-   * Whether EDI (Electronic Data Interchange) is enabled for exchanging orders and
-   * documents with this customer.
-   */
-  edi_status?: 'enabled' | 'disabled';
 
   /**
    * Email address.
@@ -974,12 +960,6 @@ export interface CustomerCreateParams {
   default_service_level_id?: string;
 
   /**
-   * Body param: Whether EDI (Electronic Data Interchange) is enabled for exchanging
-   * orders and documents with this customer.
-   */
-  edi_status?: 'enabled' | 'disabled';
-
-  /**
    * Body param: Email address.
    */
   email?: string;
@@ -1181,12 +1161,6 @@ export interface CustomerUpdateParams {
    * order does not specify one.
    */
   default_shipping_term_id?: string;
-
-  /**
-   * Body param: Whether EDI (Electronic Data Interchange) is enabled for exchanging
-   * orders and documents with this customer.
-   */
-  edi_status?: 'enabled' | 'disabled';
 
   /**
    * Body param: Email address.

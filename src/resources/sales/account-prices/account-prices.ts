@@ -415,12 +415,6 @@ export interface Customer {
   defaults: CustomerDefaults | null;
 
   /**
-   * Whether EDI (Electronic Data Interchange) is enabled for exchanging orders and
-   * documents with this customer.
-   */
-  edi_status: 'enabled' | 'disabled';
-
-  /**
    * Customer freight and carrier settings.
    */
   freight_preferences: CustomerFreightPreferences | null;
