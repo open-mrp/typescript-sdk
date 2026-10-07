@@ -324,8 +324,11 @@ export interface ProductionRun {
 
   /**
    * Number of batches currently recorded against this run.
+   *
+   * Null to customer and supplier portal users: a run can hold other customers'
+   * work.
    */
-  batch_count: number;
+  batch_count: number | null;
 
   /**
    * A single page of resources, together with the metadata needed to page through

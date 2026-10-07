@@ -171,8 +171,11 @@ export interface ProductionScheduleSettings {
    * the typical changeover duration it prices the setup cost that decides economic
    * campaign sizes. The constraint department's own labor rate takes precedence when
    * it has one, leaving this as the fallback.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  changeover_labor_rate: number;
+  changeover_labor_rate: number | null;
 
   /**
    * Longest plausible changeover, and the ceiling of the changeover model.
@@ -455,6 +458,9 @@ export interface UpdateProductionScheduleSettingsRequest {
    * rate, because one person works a single machine through a changeover. The
    * constraint department's own labor rate takes precedence when it has one, leaving
    * this as the fallback.
+   *
+   * Ignored unless the caller holds `costs:read`: the stored rate is kept, because a
+   * caller who cannot read it cannot send it back.
    */
   changeover_labor_rate: number;
 
@@ -715,6 +721,9 @@ export interface ProductionScheduleSettingUpdateParams {
    * rate, because one person works a single machine through a changeover. The
    * constraint department's own labor rate takes precedence when it has one, leaving
    * this as the fallback.
+   *
+   * Ignored unless the caller holds `costs:read`: the stored rate is kept, because a
+   * caller who cannot read it cannot send it back.
    */
   changeover_labor_rate: number;
 

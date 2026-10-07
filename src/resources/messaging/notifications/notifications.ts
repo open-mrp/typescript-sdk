@@ -241,7 +241,8 @@ export interface Notification {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
-    | 'production_run.updated';
+    | 'production_run.updated'
+    | 'invoice.payment_status_changed';
 
   change_count: number | null;
 
@@ -454,7 +455,8 @@ export interface SendNotificationRequest {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
-    | 'production_run.updated';
+    | 'production_run.updated'
+    | 'invoice.payment_status_changed';
 
   /**
    * Who a notification is aimed at.
@@ -605,6 +607,10 @@ export interface SendNotificationRequest {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -804,7 +810,13 @@ export interface SendNotificationRequest {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * How prominently the notification should be surfaced, from `low` through
@@ -829,7 +841,8 @@ export interface NotificationCreateParams {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
-    | 'production_run.updated';
+    | 'production_run.updated'
+    | 'invoice.payment_status_changed';
 
   /**
    * Who a notification is aimed at.
@@ -980,6 +993,10 @@ export interface NotificationCreateParams {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -1179,7 +1196,13 @@ export interface NotificationCreateParams {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * How prominently the notification should be surfaced, from `low` through
@@ -1202,7 +1225,8 @@ export interface NotificationListParams {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
-    | 'production_run.updated';
+    | 'production_run.updated'
+    | 'invoice.payment_status_changed';
 
   /**
    * Opaque cursor token identifying where the page of results starts.

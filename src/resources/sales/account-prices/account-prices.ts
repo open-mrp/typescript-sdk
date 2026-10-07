@@ -25,11 +25,14 @@ export class AccountPrices extends APIResource {
    * Returns a paginated list of account prices, newest first.
    *
    * The search term matches the recipient customer's name or their customer number.
-   * Customer portal users always see only the prices that apply to their own
-   * account, whatever `recipient_account_id` is set to.
+   * Customer and supplier portal users always see only the prices that apply to
+   * their own account, whatever `recipient_account_id` is set to.
    *
-   * This endpoint requires the permissions: `discounts:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `discounts:read`.
    *
    * @example
    * ```ts
@@ -47,11 +50,14 @@ export class AccountPrices extends APIResource {
   /**
    * Returns an account price by ID.
    *
-   * A customer portal user can only retrieve a price whose recipient is their own
-   * account or its parent; any other price is reported as not found.
+   * A customer or supplier portal user can only retrieve a price whose recipient is
+   * their own account or its parent; any other price is reported as not found.
    *
-   * This endpoint requires the permissions: `discounts:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `discounts:read`.
    *
    * @example
    * ```ts
@@ -377,8 +383,11 @@ export interface Customer {
    * The customer counts as exempt if this field, its `type` group, or any of its
    * `price_groups` is `commission_exempt`. Exempt customers never have a sales rep
    * assigned automatically when an order is created without one.
+   *
+   * Null to customer and supplier portal users, like the rest of your commission
+   * settings.
    */
-  commission_policy: 'commission_applied' | 'commission_exempt';
+  commission_policy: 'commission_applied' | 'commission_exempt' | null;
 
   /**
    * Customer contact information.
@@ -423,6 +432,8 @@ export interface Customer {
 
   /**
    * Free-form note about the customer.
+   *
+   * Null to customer and supplier portal users: it is your own team's note.
    */
   note: string | null;
 
@@ -543,7 +554,8 @@ export interface CustomerDefaults {
    *   dates.
    *
    * With none set here the customer inherits its account group's policy, then falls
-   * back to make-to-stock.
+   * back to make-to-stock. Always null to customer and supplier portal users, like
+   * the rest of your production planning.
    */
   fulfillment_policy: 'make_to_stock' | 'make_to_order' | null;
 

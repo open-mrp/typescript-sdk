@@ -29,8 +29,11 @@ export class Lines extends APIResource {
    * issued, the line is added to its pick as outstanding work and the pick is
    * reopened if it had been finished.
    *
-   * This endpoint requires the permissions: `customers:update`, `suppliers:update`,
-   * `sales_orders:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `sales_orders:update`.
    *
    * @example
    * ```ts
@@ -68,8 +71,11 @@ export class Lines extends APIResource {
    * carry the full previously ordered quantity follow the new value, while partial
    * ones keep the amount that actually moved.
    *
-   * This endpoint requires the permissions: `customers:update`, `suppliers:update`,
-   * `sales_orders:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `sales_orders:update`.
    *
    * @example
    * ```ts
@@ -108,8 +114,11 @@ export class Lines extends APIResource {
    * order's pick is deleted and the order falls back to `estimate` with its reserved
    * inventory released.
    *
-   * This endpoint requires the permissions: `customers:update`, `suppliers:update`,
-   * `sales_orders:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `sales_orders:update`.
    *
    * @example
    * ```ts

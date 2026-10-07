@@ -120,6 +120,7 @@ describe('resource products', () => {
         'pd_07oe0r7adh2w',
         {
           include: ['product_line'],
+          category_id: 'ic_d06g9c6yc9ck',
           description: 'Wireless barcode scanner with charging cradle (v2)',
           notes: 'Firmware 2.1 improves Bluetooth pairing reliability.',
           portal_visibility: 'visible',

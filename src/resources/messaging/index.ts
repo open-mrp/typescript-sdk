@@ -35,6 +35,7 @@ export {
   Conversations,
   type Conversation,
   type ConversationParticipant,
+  type ConversationParticipantInput,
   type CreateConversationRequest,
   type ListConversation,
   type ListConversationParticipant,

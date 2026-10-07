@@ -76,8 +76,8 @@ export class SalesTargets extends APIResource {
    * amount, and unit. If it already exists, only the amount value is updated — the
    * dates and unit are left unchanged, so raising or lowering a goal mid-period is
    * the intended use. The sales rep must be an active account user in your account,
-   * and the target ID must belong to that account, otherwise the request returns a
-   * not-found error.
+   * and an existing target must be filed under that rep, otherwise the request
+   * returns a not-found error.
    *
    * This endpoint requires the permission: `sales_targets:update`.
    *
@@ -114,7 +114,8 @@ export class SalesTargets extends APIResource {
  */
 export interface CreateSalesTargetRequest {
   /**
-   * The unit the goal is denominated in, typically a currency unit.
+   * The unit the goal is denominated in, typically a currency unit. It must be one
+   * of your account's units or a unit every account shares.
    */
   amount_unit_id: string;
 
@@ -124,7 +125,7 @@ export interface CreateSalesTargetRequest {
   amount_value: string;
 
   /**
-   * End of the period the target applies to.
+   * End of the period the target applies to. It may not be before `starts_at`.
    */
   ends_at: string;
 
@@ -215,7 +216,8 @@ export interface SalesTarget {
  */
 export interface UpsertSalesTargetRequest {
   /**
-   * The unit the goal is denominated in, typically a currency unit.
+   * The unit the goal is denominated in, typically a currency unit. It must be one
+   * of your account's units or a unit every account shares.
    *
    * Only applied when creating a new target; the unit on an existing target is not
    * changed.
@@ -231,7 +233,7 @@ export interface UpsertSalesTargetRequest {
   amount_value: string;
 
   /**
-   * End of the period the target applies to.
+   * End of the period the target applies to. It may not be before `starts_at`.
    *
    * Only applied when creating a new target; the dates on an existing target are not
    * changed.
@@ -272,7 +274,8 @@ export interface SalesTargetListParams {
 
 export interface SalesTargetCreateParams {
   /**
-   * The unit the goal is denominated in, typically a currency unit.
+   * The unit the goal is denominated in, typically a currency unit. It must be one
+   * of your account's units or a unit every account shares.
    */
   amount_unit_id: string;
 
@@ -282,7 +285,7 @@ export interface SalesTargetCreateParams {
   amount_value: string;
 
   /**
-   * End of the period the target applies to.
+   * End of the period the target applies to. It may not be before `starts_at`.
    */
   ends_at: string;
 
@@ -302,7 +305,8 @@ export interface SalesTargetUpdateParams {
   id: string;
 
   /**
-   * Body param: The unit the goal is denominated in, typically a currency unit.
+   * Body param: The unit the goal is denominated in, typically a currency unit. It
+   * must be one of your account's units or a unit every account shares.
    *
    * Only applied when creating a new target; the unit on an existing target is not
    * changed.
@@ -319,7 +323,8 @@ export interface SalesTargetUpdateParams {
   amount_value: string;
 
   /**
-   * Body param: End of the period the target applies to.
+   * Body param: End of the period the target applies to. It may not be before
+   * `starts_at`.
    *
    * Only applied when creating a new target; the dates on an existing target are not
    * changed.

@@ -23,7 +23,8 @@ export class Actions extends APIResource {
    * none of those are copied over from the sources, and the sources' notification
    * recipients are discarded rather than transferred.
    *
-   * This endpoint requires the permissions: `customers:update`, `customers:delete`.
+   * This endpoint requires the permissions: `customers:update` and
+   * `customers:delete`.
    *
    * @example
    * ```ts

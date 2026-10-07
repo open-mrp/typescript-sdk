@@ -185,8 +185,7 @@ export class Actions extends APIResource {
    * outright, since that is far more likely to be a misconfigured lot size than a
    * real week's work.
    *
-   * This endpoint requires the permissions: `production_schedules:update`,
-   * `production_runs:create`.
+   * This endpoint requires the permission: `production_schedules:update`.
    *
    * @example
    * ```ts
@@ -814,8 +813,11 @@ export interface SchedulePolicy {
 
   /**
    * Annual cost of holding one unit.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  holding_cost: number;
+  holding_cost: number | null;
 
   /**
    * Entity is a polymorphic reference to any resource in the system.
@@ -870,8 +872,11 @@ export interface SchedulePolicy {
 
   /**
    * Cost of one changeover, used as the setup cost in the lot-size calculation.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  setup_cost: number;
+  setup_cost: number | null;
 
   /**
    * SKU of the item.
@@ -880,8 +885,11 @@ export interface SchedulePolicy {
 
   /**
    * Standard cost per unit.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  unit_cost: number;
+  unit_cost: number | null;
 
   /**
    * Demand used for planning, per week.

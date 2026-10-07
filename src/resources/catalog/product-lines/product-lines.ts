@@ -28,8 +28,11 @@ export class ProductLines extends APIResource {
    * Covers both the product lines your account owns and the shared system lines. The
    * `q` search term is matched against the product line name.
    *
-   * This endpoint requires the permissions: `product_lines:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `product_lines:read`.
    *
    * @example
    * ```ts
@@ -50,8 +53,11 @@ export class ProductLines extends APIResource {
    * Both the product lines your account owns and the shared system lines can be
    * retrieved.
    *
-   * This endpoint requires the permissions: `product_lines:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `product_lines:read`.
    *
    * @example
    * ```ts
@@ -259,8 +265,11 @@ export interface ProductLine {
    * - `commission_exempt`: no commission applies to these products.
    * - `commission_applied`: commission applies to these products, unless overridden
    *   elsewhere.
+   *
+   * Null to customer and supplier portal users, like the rest of your commission
+   * settings.
    */
-  commission_policy: 'commission_applied' | 'commission_exempt';
+  commission_policy: 'commission_applied' | 'commission_exempt' | null;
 
   /**
    * Creation timestamp.
@@ -298,7 +307,8 @@ export interface ProductLine {
    * - `make_to_order`: built only against orders already on the book, holding no
    *   buffer.
    *
-   * Null falls through to the account default.
+   * Null falls through to the account default. Always null to customer and supplier
+   * portal users, like the rest of your production planning.
    */
   fulfillment_policy: 'make_to_stock' | 'make_to_order' | null;
 
@@ -312,6 +322,8 @@ export interface ProductLine {
 
   /**
    * Free-form notes about the product line.
+   *
+   * Null to customer and supplier portal users: they are your own team's notes.
    */
   notes: string | null;
 

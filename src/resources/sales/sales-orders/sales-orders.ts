@@ -72,10 +72,14 @@ export class SalesOrders extends APIResource {
    *
    * A free-text search term (`q`) is matched as an exact value against the order
    * number and the customer purchase order number, and still respects the other
-   * filters. Customer accounts calling this endpoint only ever see their own orders.
+   * filters. A customer or supplier portal calling this endpoint only ever sees the
+   * orders its own account placed, whatever filters it sets.
    *
-   * This endpoint requires the permissions: `sales_orders:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `sales_orders:read`.
    *
    * @example
    * ```ts
@@ -93,8 +97,14 @@ export class SalesOrders extends APIResource {
   /**
    * Returns a sales order by ID.
    *
-   * This endpoint requires the permissions: `customers:read`, `suppliers:read`,
-   * `sales_orders:read`.
+   * A customer or supplier portal retrieves only an order its own account placed;
+   * any other order is reported as not found.
+   *
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `sales_orders:read`.
    *
    * @example
    * ```ts
@@ -125,7 +135,6 @@ export class SalesOrders extends APIResource {
    * @example
    * ```ts
    * const salesOrder = await client.sales.salesOrders.create({
-   *   bill_to_address_id: 'ad_npqa5y43q26z',
    *   buyer_account_id: 'ac_opnlh43ymyee',
    *   lines: [
    *     {
@@ -134,10 +143,10 @@ export class SalesOrders extends APIResource {
    *     },
    *   ],
    *   priority_code: 'normal',
-   *   ship_to_address_id: 'ad_npqa5y43q26z',
    *   acknowledgement_email_contacts: [
    *     { account_user_id: 'acus_e5zu8bde0z3h' },
    *   ],
+   *   bill_to_address_id: 'ad_npqa5y43q26z',
    *   carrier_billing_account_number: '123456789',
    *   carrier_billing_type: 'sender',
    *   carrier_id: 'cr_tv5vfjtgu1n3',
@@ -151,6 +160,7 @@ export class SalesOrders extends APIResource {
    *   promised_at: '2026-05-20T00:00:00Z',
    *   sales_rep_id: 'acus_e5zu8bde0z3h',
    *   service_level_id: 'crop_4ilk9p6gccrx',
+   *   ship_to_address_id: 'ad_npqa5y43q26z',
    *   shipping_term_id: 'shtm_c5gxy05whw6r',
    * });
    * ```
@@ -498,13 +508,6 @@ export interface CreateSalesOrderLineInput {
  */
 export interface CreateSalesOrderRequest {
   /**
-   * Bill-to address ID.
-   *
-   * Must reference an existing address on the order's owner or buyer account.
-   */
-  bill_to_address_id: string;
-
-  /**
    * ID of the customer account the order is for.
    */
   buyer_account_id: string;
@@ -523,18 +526,31 @@ export interface CreateSalesOrderRequest {
   priority_code: 'low' | 'normal' | 'high';
 
   /**
-   * Ship-to address ID.
-   *
-   * Must reference an existing address on the order's owner or buyer account.
-   */
-  ship_to_address_id: string;
-
-  /**
    * Users who should receive order acknowledgement emails for this order.
    *
    * Each must be a user on the customer's account.
    */
   acknowledgement_email_contacts?: Array<SalesOrderEmailContactInput>;
+
+  /**
+   * An address saved together with the record that uses it, under that record's own
+   * permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  bill_to_address?: InlineAddressInput;
+
+  /**
+   * Bill-to address ID.
+   *
+   * Must reference an existing address on the order's owner or buyer account.
+   * Required unless `bill_to_address` is sent instead.
+   */
+  bill_to_address_id?: string;
 
   /**
    * Carrier billing account number charged when `carrier_billing_type` is
@@ -643,6 +659,26 @@ export interface CreateSalesOrderRequest {
   ship_by_override_date?: string;
 
   /**
+   * An address saved together with the record that uses it, under that record's own
+   * permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  ship_to_address?: InlineAddressInput;
+
+  /**
+   * Ship-to address ID.
+   *
+   * Must reference an existing address on the order's owner or buyer account.
+   * Required unless `ship_to_address` is sent instead.
+   */
+  ship_to_address_id?: string;
+
+  /**
    * ID of the shipping terms for the order.
    *
    * Falls back to the customer's default shipping term; the order is rejected when
@@ -733,6 +769,83 @@ export interface Freight {
    * carrier itself; any carrier can also have service levels you create by hand.
    */
   service_level: AccountPricesAPI.ServiceLevel | null;
+}
+
+/**
+ * An address saved together with the record that uses it, under that record's own
+ * permission.
+ *
+ * Without `id`, a new address is created from these fields, so `name` and
+ * `country` are required. With `id`, that saved address is updated: omitted fields
+ * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+ * `street_line_2`. The address must already belong to the account the record saves
+ * it in.
+ */
+export interface InlineAddressInput {
+  /**
+   * ID of a saved address to update instead of creating a new one.
+   */
+  id?: string;
+
+  /**
+   * Two-letter ISO 3166-1 country code, such as `US`. Required when `id` is omitted.
+   */
+  country?: string;
+
+  /**
+   * Email address associated with the address.
+   */
+  email?: string | null;
+
+  /**
+   * City or locality.
+   */
+  locality?: string;
+
+  /**
+   * Display name of the address. Required when `id` is omitted.
+   */
+  name?: string;
+
+  /**
+   * Phone number associated with the address.
+   */
+  phone?: string | null;
+
+  /**
+   * Postal or ZIP code.
+   */
+  postal_code?: string;
+
+  /**
+   * The operating calendar naming the days this dock accepts freight, overriding the
+   * customer's own.
+   */
+  receive_calendar_id?: string | null;
+
+  /**
+   * State or administrative area.
+   */
+  state?: string;
+
+  /**
+   * First line of the street address.
+   */
+  street_line_1?: string;
+
+  /**
+   * Second line of the street address.
+   */
+  street_line_2?: string | null;
+
+  /**
+   * How the address is used.
+   *
+   * - `standard`: a normal shipping or billing address.
+   * - `drop_ship`: an address an order is shipped to directly, typically a third
+   *   party or end customer rather than the account itself.
+   */
+  type?: 'standard' | 'drop_ship';
 }
 
 /**
@@ -1540,10 +1653,22 @@ export interface UpdateSalesOrderRequest {
   acknowledgment_status?: 'not_sent' | 'sent';
 
   /**
+   * An address saved together with the record that uses it, under that record's own
+   * permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  billing_address?: InlineAddressInput;
+
+  /**
    * Billing address ID.
    *
-   * Re-points the order to an existing address. To change an address's contents, use
-   * the update-address endpoint.
+   * Re-points the order to an existing address. To change the address's contents
+   * with the order, send `billing_address` instead.
    */
   billing_address_id?: string;
 
@@ -1640,10 +1765,22 @@ export interface UpdateSalesOrderRequest {
   ship_by_override_date?: string | null;
 
   /**
+   * An address saved together with the record that uses it, under that record's own
+   * permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  shipping_address?: InlineAddressInput;
+
+  /**
    * Shipping address ID.
    *
-   * Re-points the order to an existing address. To change an address's contents, use
-   * the update-address endpoint.
+   * Re-points the order to an existing address. To change the address's contents
+   * with the order, send `shipping_address` instead.
    */
   shipping_address_id?: string;
 
@@ -1706,11 +1843,10 @@ export interface SalesOrderListParams {
   customer_ids?: Array<string>;
 
   /**
-   * Latest order creation date to include, in `YYYY-MM-DD` format.
-   *
-   * Compared against the creation timestamp at the start of that day, so orders
-   * created later on the end date itself are excluded; pass the following day to
-   * include them.
+   * Only include orders created at or before the start of this date (`YYYY-MM-DD`,
+   * UTC), so orders created later on the end date itself are excluded; pass the
+   * following day to include them. A full timestamp (RFC 3339) is also accepted and
+   * used as given.
    */
   ends_at?: string;
 
@@ -1808,7 +1944,8 @@ export interface SalesOrderListParams {
   ship_by_before?: string;
 
   /**
-   * Earliest order creation date to include, in `YYYY-MM-DD` format.
+   * Only include orders created on or after this date (`YYYY-MM-DD`, UTC). A full
+   * timestamp (RFC 3339) is also accepted, to bound the range at a local midnight.
    */
   starts_at?: string;
 
@@ -1863,13 +2000,6 @@ export interface SalesOrderRetrieveParams {
 
 export interface SalesOrderCreateParams {
   /**
-   * Body param: Bill-to address ID.
-   *
-   * Must reference an existing address on the order's owner or buyer account.
-   */
-  bill_to_address_id: string;
-
-  /**
    * Body param: ID of the customer account the order is for.
    */
   buyer_account_id: string;
@@ -1886,13 +2016,6 @@ export interface SalesOrderCreateParams {
    * Body param: Fulfillment priority used to rank the order on the shop floor.
    */
   priority_code: 'low' | 'normal' | 'high';
-
-  /**
-   * Body param: Ship-to address ID.
-   *
-   * Must reference an existing address on the order's owner or buyer account.
-   */
-  ship_to_address_id: string;
 
   /**
    * Query param: Sub-objects to expand in the response. When omitted, sub-objects
@@ -1933,6 +2056,26 @@ export interface SalesOrderCreateParams {
    * Each must be a user on the customer's account.
    */
   acknowledgement_email_contacts?: Array<SalesOrderEmailContactInput>;
+
+  /**
+   * Body param: An address saved together with the record that uses it, under that
+   * record's own permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  bill_to_address?: InlineAddressInput;
+
+  /**
+   * Body param: Bill-to address ID.
+   *
+   * Must reference an existing address on the order's owner or buyer account.
+   * Required unless `bill_to_address` is sent instead.
+   */
+  bill_to_address_id?: string;
 
   /**
    * Body param: Carrier billing account number charged when `carrier_billing_type`
@@ -2042,6 +2185,26 @@ export interface SalesOrderCreateParams {
   ship_by_override_date?: string;
 
   /**
+   * Body param: An address saved together with the record that uses it, under that
+   * record's own permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  ship_to_address?: InlineAddressInput;
+
+  /**
+   * Body param: Ship-to address ID.
+   *
+   * Must reference an existing address on the order's owner or buyer account.
+   * Required unless `ship_to_address` is sent instead.
+   */
+  ship_to_address_id?: string;
+
+  /**
    * Body param: ID of the shipping terms for the order.
    *
    * Falls back to the customer's default shipping term; the order is rejected when
@@ -2100,10 +2263,22 @@ export interface SalesOrderUpdateParams {
   acknowledgment_status?: 'not_sent' | 'sent';
 
   /**
+   * Body param: An address saved together with the record that uses it, under that
+   * record's own permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  billing_address?: InlineAddressInput;
+
+  /**
    * Body param: Billing address ID.
    *
-   * Re-points the order to an existing address. To change an address's contents, use
-   * the update-address endpoint.
+   * Re-points the order to an existing address. To change the address's contents
+   * with the order, send `billing_address` instead.
    */
   billing_address_id?: string;
 
@@ -2202,10 +2377,22 @@ export interface SalesOrderUpdateParams {
   ship_by_override_date?: string | null;
 
   /**
+   * Body param: An address saved together with the record that uses it, under that
+   * record's own permission.
+   *
+   * Without `id`, a new address is created from these fields, so `name` and
+   * `country` are required. With `id`, that saved address is updated: omitted fields
+   * are left unchanged, and `null` clears `phone`, `email`, `receive_calendar_id` or
+   * `street_line_2`. The address must already belong to the account the record saves
+   * it in.
+   */
+  shipping_address?: InlineAddressInput;
+
+  /**
    * Body param: Shipping address ID.
    *
-   * Re-points the order to an existing address. To change an address's contents, use
-   * the update-address endpoint.
+   * Re-points the order to an existing address. To change the address's contents
+   * with the order, send `shipping_address` instead.
    */
   shipping_address_id?: string;
 
@@ -2247,6 +2434,7 @@ export declare namespace SalesOrders {
     type CreateSalesOrderRequest as CreateSalesOrderRequest,
     type CreatedBy as CreatedBy,
     type Freight as Freight,
+    type InlineAddressInput as InlineAddressInput,
     type ListQuotedSalesOrderLine as ListQuotedSalesOrderLine,
     type ListRecord as ListRecord,
     type ListSalesOrder as ListSalesOrder,

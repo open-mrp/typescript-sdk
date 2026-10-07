@@ -12,7 +12,9 @@ import {
 } from './actions';
 import * as PropertiesAPI from './properties';
 import {
+  CreateItemCategoryPropertyRequest,
   Properties,
+  PropertyCreateParams,
   PropertyDeleteParams,
   PropertyDeleteResponse,
   PropertyUpdateParams,
@@ -413,9 +415,11 @@ export declare namespace ItemCategories {
 
   export {
     Properties as Properties,
+    type CreateItemCategoryPropertyRequest as CreateItemCategoryPropertyRequest,
     type PropertyUpdateResponse as PropertyUpdateResponse,
     type PropertyDeleteResponse as PropertyDeleteResponse,
     type PropertyUpdateParams as PropertyUpdateParams,
+    type PropertyCreateParams as PropertyCreateParams,
     type PropertyDeleteParams as PropertyDeleteParams,
   };
 

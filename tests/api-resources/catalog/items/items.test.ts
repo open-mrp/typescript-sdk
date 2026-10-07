@@ -36,7 +36,7 @@ describe('resource items', () => {
           starts_at: '2019-12-27T18:11:19.117Z',
           subassembly_filter: 'all',
           supplier_id: 'supplier_id',
-          types: ['string'],
+          types: ['product'],
         },
         { path: '/_stainless_unknown_path' },
       ),

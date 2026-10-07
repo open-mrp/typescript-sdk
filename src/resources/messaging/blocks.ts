@@ -106,13 +106,35 @@ export interface AccountUser {
    *
    * Independent of the `sales_rep` role type, which still scopes analytics and hides
    * cost. Users with the `sales_rep` role are always eligible.
+   *
+   * Null to customer and supplier portal users, like the rest of your commission
+   * settings.
    */
-  is_commission_eligible: boolean;
+  is_commission_eligible: boolean | null;
 
   /**
    * When the user last accessed this account.
+   *
+   * Null to customer and supplier portal users: it is your own team's activity.
    */
   last_used_at: string | null;
+
+  /**
+   * The notifications you send this user about the customer or supplier account they
+   * belong to.
+   *
+   * Set when the account you are acting in is a customer or supplier account you
+   * manage, and an empty list when none are enabled; turn them on and off with
+   * `preferences` on create and update. `null` for your own account's users, and
+   * where an account user is embedded in another resource.
+   *
+   * - `order_acknowledgement`: the confirmation email sent when an order is placed
+   *   for the customer.
+   * - `invoice`: invoice emails for the customer's orders.
+   * - `purchase_order_submission`: a copy of each purchase order you submit to the
+   *   supplier.
+   */
+  notification_types: Array<'invoice' | 'order_acknowledgement' | 'purchase_order_submission'> | null;
 
   /**
    * Resource type identifier.

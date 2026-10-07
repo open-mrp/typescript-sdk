@@ -103,7 +103,8 @@ export interface Announcement {
     | 'agent.alert'
     | 'system.broadcast'
     | 'customer.registered'
-    | 'production_run.updated';
+    | 'production_run.updated'
+    | 'invoice.payment_status_changed';
 
   /**
    * Creation timestamp.

@@ -7,8 +7,10 @@ import {
   ActionApproveSendParams,
   ActionCancelParams,
   ActionRejectParams,
+  ActionRescheduleParams,
   Actions,
   ApproveSendDraftRequest,
+  RescheduleMessageRequest,
 } from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
@@ -109,8 +111,10 @@ export declare namespace Messages {
   export {
     Actions as Actions,
     type ApproveSendDraftRequest as ApproveSendDraftRequest,
+    type RescheduleMessageRequest as RescheduleMessageRequest,
     type ActionApproveSendParams as ActionApproveSendParams,
     type ActionRejectParams as ActionRejectParams,
     type ActionCancelParams as ActionCancelParams,
+    type ActionRescheduleParams as ActionRescheduleParams,
   };
 }

@@ -21,8 +21,11 @@ export class OrderDiscounts extends APIResource {
    * Pass `q` to narrow the list to discounts whose name or code contains the search
    * text.
    *
-   * This endpoint requires the permissions: `discounts:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `discounts:read`.
    *
    * @example
    * ```ts

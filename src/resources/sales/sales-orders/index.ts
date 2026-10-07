@@ -36,6 +36,7 @@ export {
   type CreateSalesOrderRequest,
   type CreatedBy,
   type Freight,
+  type InlineAddressInput,
   type ListQuotedSalesOrderLine,
   type ListRecord,
   type ListSalesOrder,

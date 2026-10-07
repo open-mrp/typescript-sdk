@@ -15,6 +15,8 @@ export class Actions extends APIResource {
    * Creates or updates multiple materials for the account, matched by SKU. Validates
    * and resolves synchronously, then writes asynchronously — 202 with a job to poll.
    *
+   * At most 1,000 materials and an 8 MB request body per call.
+   *
    * @example
    * ```ts
    * const job =

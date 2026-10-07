@@ -371,6 +371,10 @@ export interface SendMessageRequest {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -570,7 +574,13 @@ export interface SendMessageRequest {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * Account user ids explicitly @mentioned in the message.
@@ -832,6 +842,10 @@ export interface MessageCreateParams {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -1031,7 +1045,13 @@ export interface MessageCreateParams {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * Body param: Account user ids explicitly @mentioned in the message.

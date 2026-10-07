@@ -191,6 +191,8 @@ export interface Item {
 
   /**
    * Free-form notes about the item.
+   *
+   * Null to customer and supplier portal users: they are your own team's notes.
    */
   notes: string | null;
 
@@ -253,6 +255,8 @@ export interface ItemCategory {
 
   /**
    * Free-form notes about the item category.
+   *
+   * Null to customer and supplier portal users: they are your own team's notes.
    */
   notes: string | null;
 
@@ -519,7 +523,7 @@ export interface ItemListParams {
   /**
    * Filter to items of these types (`product`, `material`, `part`).
    */
-  types?: Array<string>;
+  types?: Array<'product' | 'material' | 'part'>;
 }
 
 export interface ItemRetrieveParams {

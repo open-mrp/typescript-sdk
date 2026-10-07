@@ -118,6 +118,7 @@ export interface NotificationPreference {
     | 'system.broadcast'
     | 'customer.registered'
     | 'production_run.updated'
+    | 'invoice.payment_status_changed'
     | null;
 
   /**

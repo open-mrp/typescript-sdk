@@ -17,8 +17,11 @@ export class Addresses extends APIResource {
    * The `q` search term matches the address name, street lines, city, state, postal
    * code, and country.
    *
-   * This endpoint requires the permissions: `addresses:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `addresses:read`.
    *
    * @example
    * ```ts
@@ -32,8 +35,11 @@ export class Addresses extends APIResource {
   /**
    * Retrieves an address by ID.
    *
-   * This endpoint requires the permissions: `addresses:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `addresses:read`.
    *
    * @example
    * ```ts
@@ -53,8 +59,11 @@ export class Addresses extends APIResource {
    * account or a customer or supplier account you manage, and can then be used as a
    * billing or shipping address on sales orders, invoices, and shipments.
    *
-   * This endpoint requires the permissions: `addresses:create`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `addresses:create`.
    *
    * @example
    * ```ts
@@ -82,8 +91,11 @@ export class Addresses extends APIResource {
    * Changing a street, locality, state, postal code, or country field may replace
    * the address's geolocation, so the geolocation `id` in the response can change.
    *
-   * This endpoint requires the permissions: `addresses:update`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `addresses:update`.
    *
    * @example
    * ```ts
@@ -118,8 +130,11 @@ export class Addresses extends APIResource {
    * Deletion fails if the address is in use as a billing or shipping address on a
    * sales order, invoice, or shipment, or as a default account address.
    *
-   * This endpoint requires the permissions: `addresses:delete`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `addresses:delete`.
    *
    * @example
    * ```ts

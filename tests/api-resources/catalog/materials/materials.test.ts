@@ -115,6 +115,7 @@ describe('resource materials', () => {
         'ml_ow202v78slbl',
         {
           include: ['item'],
+          category_id: 'ic_d06g9c6yc9ck',
           description: 'Cold-rolled 304 stainless steel sheet, 2.0mm',
           lead_time: { unit_id: 'un_82bd37dae5po', value: '10.00' },
           notes: 'Reorder point raised after Q2 demand spike.',

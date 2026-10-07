@@ -722,7 +722,7 @@ export class OpenMRP {
       {
         Accept: 'application/json',
         'User-Agent': this.getUserAgent(),
-        'OpenMRP-Version': '1.0.forge-preview.5',
+        'OpenMRP-Version': '1.0.forge-preview.6',
         'OpenMRP-Account': this.openmrpAccountID,
       },
       await this.authHeaders(options),

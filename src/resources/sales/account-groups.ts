@@ -154,8 +154,11 @@ export interface AccountGroup {
    *   in this group.
    * - `commission_exempt`: orders from accounts in this group are exempt from
    *   commission.
+   *
+   * Null to customer and supplier portal users, like the rest of your commission
+   * settings.
    */
-  commission_policy: 'commission_applied' | 'commission_exempt';
+  commission_policy: 'commission_applied' | 'commission_exempt' | null;
 
   /**
    * Creation timestamp.

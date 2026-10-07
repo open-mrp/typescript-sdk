@@ -113,6 +113,7 @@ describe('resource parts', () => {
         'pt_coba9fgvd84c',
         {
           include: ['item'],
+          category_id: 'ic_d06g9c6yc9ck',
           description: 'Deep groove ball bearing, 20x47x14mm',
           notes: 'Superseded by low-friction variant; keep for legacy assemblies.',
           sku: 'BRG-6204-2RS',

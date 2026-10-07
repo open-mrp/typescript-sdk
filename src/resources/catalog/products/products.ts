@@ -36,8 +36,11 @@ export class Products extends APIResource {
    * item; when it is supplied, products whose SKU matches are returned ahead of the
    * rest.
    *
-   * This endpoint requires the permissions: `items:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `items:read`.
    *
    * @example
    * ```ts
@@ -51,8 +54,11 @@ export class Products extends APIResource {
   /**
    * Returns a product by ID.
    *
-   * This endpoint requires the permissions: `items:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `items:read`.
    *
    * @example
    * ```ts
@@ -128,6 +134,7 @@ export class Products extends APIResource {
    * const product = await client.catalog.products.update(
    *   'pd_07oe0r7adh2w',
    *   {
+   *     category_id: 'ic_d06g9c6yc9ck',
    *     description:
    *       'Wireless barcode scanner with charging cradle (v2)',
    *     notes:
@@ -404,6 +411,17 @@ export interface Product {
  * Request to partially update a product.
  */
 export interface UpdateProductRequest {
+  /**
+   * ID of the item category to move the product to.
+   *
+   * The move is the one Change Item Category makes: the category has to be a product
+   * category and has to carry the properties of every attribute the product already
+   * has, and the product's rate units switch to the category's base unit while their
+   * numbers stay as they were. It is applied before the other fields in the request,
+   * so a `unit_price` sent alongside is written after it.
+   */
+  category_id?: string;
+
   /**
    * Free-form description of the product.
    *
@@ -695,6 +713,17 @@ export interface ProductUpdateParams {
     | 'item.burn_rate'
     | 'item.attributes'
   >;
+
+  /**
+   * Body param: ID of the item category to move the product to.
+   *
+   * The move is the one Change Item Category makes: the category has to be a product
+   * category and has to carry the properties of every attribute the product already
+   * has, and the product's rate units switch to the category's base unit while their
+   * numbers stay as they were. It is applied before the other fields in the request,
+   * so a `unit_price` sent alongside is written after it.
+   */
+  category_id?: string;
 
   /**
    * Body param: Free-form description of the product.

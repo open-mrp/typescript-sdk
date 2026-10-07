@@ -95,7 +95,6 @@ describe('resource salesOrders', () => {
 
   test('create: only required params', async () => {
     const responsePromise = client.sales.salesOrders.create({
-      bill_to_address_id: 'ad_npqa5y43q26z',
       buyer_account_id: 'ac_opnlh43ymyee',
       lines: [
         {
@@ -104,7 +103,6 @@ describe('resource salesOrders', () => {
         },
       ],
       priority_code: 'normal',
-      ship_to_address_id: 'ad_npqa5y43q26z',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -117,7 +115,6 @@ describe('resource salesOrders', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.sales.salesOrders.create({
-      bill_to_address_id: 'ad_npqa5y43q26z',
       buyer_account_id: 'ac_opnlh43ymyee',
       lines: [
         {
@@ -133,9 +130,23 @@ describe('resource salesOrders', () => {
         },
       ],
       priority_code: 'normal',
-      ship_to_address_id: 'ad_npqa5y43q26z',
       include: ['customer'],
       acknowledgement_email_contacts: [{ account_user_id: 'acus_e5zu8bde0z3h' }],
+      bill_to_address: {
+        id: 'id',
+        country: 'US',
+        email: 'email',
+        locality: 'Springfield',
+        name: 'Receiving dock',
+        phone: 'phone',
+        postal_code: '62701',
+        receive_calendar_id: 'receive_calendar_id',
+        state: 'IL',
+        street_line_1: '123 Main St',
+        street_line_2: 'street_line_2',
+        type: 'standard',
+      },
+      bill_to_address_id: 'ad_npqa5y43q26z',
       carrier_billing_account_number: '123456789',
       carrier_billing_type: 'sender',
       carrier_id: 'cr_tv5vfjtgu1n3',
@@ -149,6 +160,21 @@ describe('resource salesOrders', () => {
       sales_rep_id: 'acus_e5zu8bde0z3h',
       service_level_id: 'crop_4ilk9p6gccrx',
       ship_by_override_date: '2019-12-27T18:11:19.117Z',
+      ship_to_address: {
+        id: 'id',
+        country: 'US',
+        email: 'email',
+        locality: 'Springfield',
+        name: 'Receiving dock',
+        phone: 'phone',
+        postal_code: '62701',
+        receive_calendar_id: 'receive_calendar_id',
+        state: 'IL',
+        street_line_1: '123 Main St',
+        street_line_2: 'street_line_2',
+        type: 'standard',
+      },
+      ship_to_address_id: 'ad_npqa5y43q26z',
       shipping_term_id: 'shtm_c5gxy05whw6r',
     });
   });
@@ -173,6 +199,20 @@ describe('resource salesOrders', () => {
           include: ['customer'],
           acknowledgement_email_contacts: [{ account_user_id: 'account_user_id' }],
           acknowledgment_status: 'not_sent',
+          billing_address: {
+            id: 'id',
+            country: 'US',
+            email: 'email',
+            locality: 'Springfield',
+            name: 'Receiving dock',
+            phone: 'phone',
+            postal_code: '62701',
+            receive_calendar_id: 'receive_calendar_id',
+            state: 'IL',
+            street_line_1: '123 Main St',
+            street_line_2: 'street_line_2',
+            type: 'standard',
+          },
           billing_address_id: 'billing_address_id',
           carrier_billing_account_number: 'carrier_billing_account_number',
           carrier_billing_type: 'sender',
@@ -189,6 +229,20 @@ describe('resource salesOrders', () => {
           sales_rep_id: 'sales_rep_id',
           service_level_id: 'service_level_id',
           ship_by_override_date: '2019-12-27T18:11:19.117Z',
+          shipping_address: {
+            id: 'id',
+            country: 'US',
+            email: 'email',
+            locality: 'Springfield',
+            name: 'Receiving dock',
+            phone: 'phone',
+            postal_code: '62701',
+            receive_calendar_id: 'receive_calendar_id',
+            state: 'IL',
+            street_line_1: '123 Main St',
+            street_line_2: 'street_line_2',
+            type: 'standard',
+          },
           shipping_address_id: 'ad_npqa5y43q26z',
           shipping_term_id: 'shipping_term_id',
         },

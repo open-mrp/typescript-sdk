@@ -401,12 +401,14 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/catalog/item-categories/properties.ts">CreateItemCategoryPropertyRequest</a></code>
 - <code><a href="./src/resources/catalog/item-categories/properties.ts">PropertyUpdateResponse</a></code>
 - <code><a href="./src/resources/catalog/item-categories/properties.ts">PropertyDeleteResponse</a></code>
 
 Methods:
 
 - <code title="put /v1/catalog/item-categories/{id}/properties/{property_id}">client.catalog.itemCategories.properties.<a href="./src/resources/catalog/item-categories/properties.ts">update</a>(propertyID, { ...params }) -> PropertyUpdateResponse</code>
+- <code title="post /v1/catalog/item-categories/{id}/properties">client.catalog.itemCategories.properties.<a href="./src/resources/catalog/item-categories/properties.ts">create</a>(id, { ...params }) -> Property</code>
 - <code title="delete /v1/catalog/item-categories/{id}/properties/{property_id}">client.catalog.itemCategories.properties.<a href="./src/resources/catalog/item-categories/properties.ts">delete</a>(propertyID, { ...params }) -> PropertyDeleteResponse</code>
 
 ### Actions
@@ -701,6 +703,7 @@ Types:
 
 - <code><a href="./src/resources/messaging/conversations/conversations.ts">Conversation</a></code>
 - <code><a href="./src/resources/messaging/conversations/conversations.ts">ConversationParticipant</a></code>
+- <code><a href="./src/resources/messaging/conversations/conversations.ts">ConversationParticipantInput</a></code>
 - <code><a href="./src/resources/messaging/conversations/conversations.ts">CreateConversationRequest</a></code>
 - <code><a href="./src/resources/messaging/conversations/conversations.ts">ListConversation</a></code>
 - <code><a href="./src/resources/messaging/conversations/conversations.ts">ListConversationParticipant</a></code>
@@ -825,12 +828,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/messaging/messages/actions.ts">ApproveSendDraftRequest</a></code>
+- <code><a href="./src/resources/messaging/messages/actions.ts">RescheduleMessageRequest</a></code>
 
 Methods:
 
 - <code title="post /v1/messaging/messages/{id}/actions/approve-send">client.messaging.messages.actions.<a href="./src/resources/messaging/messages/actions.ts">approveSend</a>(id, { ...params }) -> Message</code>
 - <code title="post /v1/messaging/messages/{id}/actions/reject">client.messaging.messages.actions.<a href="./src/resources/messaging/messages/actions.ts">reject</a>(id, { ...params }) -> Message</code>
 - <code title="post /v1/messaging/messages/{id}/actions/cancel">client.messaging.messages.actions.<a href="./src/resources/messaging/messages/actions.ts">cancel</a>(id, { ...params }) -> Message</code>
+- <code title="post /v1/messaging/messages/{id}/actions/reschedule">client.messaging.messages.actions.<a href="./src/resources/messaging/messages/actions.ts">reschedule</a>(id, { ...params }) -> Message</code>
 
 ## Groups
 
@@ -1155,6 +1160,7 @@ Types:
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">CreateSalesOrderRequest</a></code>
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">CreatedBy</a></code>
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">Freight</a></code>
+- <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">InlineAddressInput</a></code>
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">ListQuotedSalesOrderLine</a></code>
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">ListRecord</a></code>
 - <code><a href="./src/resources/sales/sales-orders/sales-orders.ts">ListSalesOrder</a></code>
@@ -1402,10 +1408,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/operations/inventory-change-logs/actions.ts">FileDownload</a></code>
+- <code><a href="./src/resources/operations/inventory-change-logs/actions.ts">StartInventoryChangeLogsExportRequest</a></code>
 
 Methods:
 
 - <code title="get /v1/operations/inventory-change-logs/actions/export">client.operations.inventoryChangeLogs.actions.<a href="./src/resources/operations/inventory-change-logs/actions.ts">export</a>({ ...params }) -> FileDownload</code>
+- <code title="post /v1/operations/inventory-change-logs/actions/export">client.operations.inventoryChangeLogs.actions.<a href="./src/resources/operations/inventory-change-logs/actions.ts">startExport</a>({ ...params }) -> Job</code>
 
 ## Machines
 

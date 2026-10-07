@@ -431,6 +431,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/v1/catalog/item-categories/{id}/properties/{property_id}',
   },
   {
+    clientCallName: 'client.catalog.itemCategories.properties.create',
+    fullyQualifiedName: 'catalog.itemCategories.properties.create',
+    httpMethod: 'post',
+    httpPath: '/v1/catalog/item-categories/{id}/properties',
+  },
+  {
     clientCallName: 'client.catalog.itemCategories.properties.delete',
     fullyQualifiedName: 'catalog.itemCategories.properties.delete',
     httpMethod: 'delete',
@@ -975,6 +981,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'messaging.messages.actions.cancel',
     httpMethod: 'post',
     httpPath: '/v1/messaging/messages/{id}/actions/cancel',
+  },
+  {
+    clientCallName: 'client.messaging.messages.actions.reschedule',
+    fullyQualifiedName: 'messaging.messages.actions.reschedule',
+    httpMethod: 'post',
+    httpPath: '/v1/messaging/messages/{id}/actions/reschedule',
   },
   {
     clientCallName: 'client.messaging.groups.create',
@@ -1706,6 +1718,12 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.operations.inventoryChangeLogs.actions.export',
     fullyQualifiedName: 'operations.inventoryChangeLogs.actions.export',
     httpMethod: 'get',
+    httpPath: '/v1/operations/inventory-change-logs/actions/export',
+  },
+  {
+    clientCallName: 'client.operations.inventoryChangeLogs.actions.startExport',
+    fullyQualifiedName: 'operations.inventoryChangeLogs.actions.startExport',
+    httpMethod: 'post',
     httpPath: '/v1/operations/inventory-change-logs/actions/export',
   },
   {

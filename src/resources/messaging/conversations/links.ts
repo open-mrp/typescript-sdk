@@ -220,6 +220,10 @@ export interface AddConversationLinkRequest {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -419,7 +423,13 @@ export interface AddConversationLinkRequest {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 }
 
 /**
@@ -618,6 +628,10 @@ export interface LinkCreateParams {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -817,7 +831,13 @@ export interface LinkCreateParams {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * Query param: Sub-objects to expand in the response. When omitted, sub-objects

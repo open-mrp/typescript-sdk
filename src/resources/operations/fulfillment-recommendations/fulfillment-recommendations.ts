@@ -55,8 +55,11 @@ export class FulfillmentRecommendations extends APIResource {
 export interface FulfillmentRecommendation {
   /**
    * Annual cost of goods for this item: demand times unit cost.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  annual_cogs: number;
+  annual_cogs: number | null;
 
   /**
    * Months observed divided by months with demand: 1 means it sells every month, 3

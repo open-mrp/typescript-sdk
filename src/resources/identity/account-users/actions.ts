@@ -13,11 +13,15 @@ export class Actions extends APIResource {
    * Activates a disabled or removed account user, restoring their access to the
    * account you are acting in.
    *
-   * Reactivation consumes a seat, so the request fails if the account is at its seat
-   * limit. Activating an already-active user is a no-op.
+   * Reactivating a user in your own account consumes a seat, so the request fails if
+   * your plan is at its seat limit; users of a customer or supplier account you
+   * manage take no seat. Activating an already-active user is a no-op.
    *
-   * This endpoint requires the permissions: `team:update`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `team:update`.
    *
    * @example
    * ```ts
@@ -41,8 +45,11 @@ export class Actions extends APIResource {
    * activated before they can be disabled. Disabling an already-disabled user is a
    * no-op.
    *
-   * This endpoint requires the permissions: `team:update`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `team:update`.
    *
    * @example
    * ```ts
@@ -61,12 +68,15 @@ export class Actions extends APIResource {
    *
    * Removal is a soft delete: removed users are excluded from listings unless
    * requested via `removed_scope`, they free the seat they occupied, and they can be
-   * restored with the activate action. Removing an already-removed user is a no-op.
-   * The user's profile itself is untouched, so their access to any other account
-   * they belong to is unaffected.
+   * restored with the activate action or by adding them again. Removing an
+   * already-removed user is a no-op. The user's profile itself is untouched, so
+   * their access to any other account they belong to is unaffected.
    *
-   * This endpoint requires the permissions: `team:delete`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:delete`, and acting in a
+   * supplier's account requires `suppliers:delete`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `team:delete`.
    *
    * @example
    * ```ts

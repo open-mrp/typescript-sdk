@@ -71,4 +71,25 @@ describe('resource actions', () => {
       ),
     ).rejects.toThrow(OpenMRP.NotFoundError);
   });
+
+  test('reschedule: only required params', async () => {
+    const responsePromise = client.messaging.messages.actions.reschedule('mg_fdny8633ebgw', {
+      scheduled_at: '2026-03-02T14:00:00Z',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('reschedule: required and optional params', async () => {
+    const response = await client.messaging.messages.actions.reschedule('mg_fdny8633ebgw', {
+      scheduled_at: '2026-03-02T14:00:00Z',
+      include: ['sender'],
+      body: 'Reminder: the line goes down for maintenance at 6pm.',
+    });
+  });
 });

@@ -16,8 +16,9 @@ export class AuditEvents extends APIResource {
    *
    * Results cover every change where your account is either the acting account or
    * the account that was acted upon, so a customer's or supplier's changes to your
-   * records appear alongside your own. The `q` parameter searches the resource type,
-   * action, resource ID, and originating request ID.
+   * records appear alongside your own. The `q` parameter matches a resource ID, an
+   * originating request ID, a resource type or an action exactly; a type or action
+   * can be given as its code (`sales_order`) or its name (`Sales Order`).
    *
    * This endpoint requires the permission: `audit_events:read`.
    *
@@ -301,6 +302,10 @@ export interface AuditEvent {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -500,7 +505,13 @@ export interface AuditEvent {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * Originating client IP address.
@@ -524,9 +535,11 @@ export interface AuditFieldChange {
   /**
    * New value as a JSON fragment.
    *
-   * `null` on `delete` events, where the field has no remaining value. Encoded as a
-   * JSON value (object, array, string, number, boolean, or null), not a JSON-encoded
-   * string.
+   * `null` on `delete` events, where the field has no remaining value.
+   *
+   * Both values are `null` on a change to a cost field, such as a unit cost or labor
+   * rate, unless the caller holds `costs:read`. Encoded as a JSON value (object,
+   * array, string, number, boolean, or null), not a JSON-encoded string.
    */
   new_value: unknown | null;
 
@@ -729,6 +742,10 @@ export interface ListObjectType {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -929,6 +946,12 @@ export interface ListObjectType {
     | 'pick_related'
     | 'pick_totals'
     | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category'
   >;
 
   /**
@@ -1145,6 +1168,10 @@ export interface AuditEventListParams {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -1345,6 +1372,12 @@ export interface AuditEventListParams {
     | 'pick_related'
     | 'pick_totals'
     | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category'
   >;
 
   /**
@@ -1484,6 +1517,10 @@ export interface AuditEventListParams {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -1683,7 +1720,13 @@ export interface AuditEventListParams {
     | 'invoice_related'
     | 'pick_related'
     | 'pick_totals'
-    | 'pick_stage_total';
+    | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category';
 
   /**
    * Restricts results to audit events on or after this timestamp.

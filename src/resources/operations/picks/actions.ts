@@ -16,9 +16,11 @@ export class Actions extends APIResource {
    *
    * Sets each unpacked line's picked quantity to the quantity still outstanding on
    * its sales order line, after accounting for what other pick lines for that order
-   * line have already picked. Lines that have already been packed are unaffected.
-   * Use this to fill in a full pick in one call instead of picking each line
-   * individually; nothing is shipped until the pick is packed.
+   * line have already picked, and never lowers a line: calling it again changes
+   * nothing, and an over-pick is kept as recorded. Lines that have already been
+   * packed, and every line of a finished pick, are unaffected. Use this to fill in a
+   * full pick in one call instead of picking each line individually; nothing is
+   * shipped until the pick is packed.
    *
    * This endpoint requires the permission: `picks:update`.
    *
@@ -72,8 +74,10 @@ export class Actions extends APIResource {
    * remainder, so packing a partial pick leaves the pick open for the next round.
    * The pick is marked finished only once every one of its lines is packed.
    *
-   * Returns a validation error if no line on the pick has a picked quantity greater
-   * than zero.
+   * Returns a validation error if the pick is already finished or no line on the
+   * pick has a picked quantity greater than zero. Packs of the same pick run one at
+   * a time, so a second pack accepted alongside the first finds nothing left to pack
+   * and its job fails rather than shipping the lines twice.
    *
    * This endpoint requires the permission: `picks:update`.
    *

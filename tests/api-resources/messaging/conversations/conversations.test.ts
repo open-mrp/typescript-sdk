@@ -28,6 +28,7 @@ describe('resource conversations', () => {
       type: 'group',
       include: ['assignee'],
       group_id: 'cvgp_wjlypugna7s4',
+      participants: [{ account_user_id: 'acus_e5zu8bde0z3h', role: 'admin' }],
       title: 'Order #1042 — shipping question',
       topic_resource_id: 'or_9lqo07quiwyb',
       topic_resource_type: 'sales_order',

@@ -17,8 +17,14 @@ export class Jobs extends APIResource {
    * `Location` to observe its outcome. A completed export carries the link to its
    * file on `export.url`.
    *
-   * This endpoint requires the permissions: `jobs:read`, `customers:read`,
-   * `suppliers:read`.
+   * A customer or supplier portal reads only the jobs it started itself; any other
+   * job is reported as not found.
+   *
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `jobs:read`.
    *
    * @example
    * ```ts
@@ -243,6 +249,10 @@ export interface Job {
     | 'sales_totals'
     | 'sales_breakdown'
     | 'sales_invoice'
+    | 'open_orders_summary'
+    | 'open_order_product'
+    | 'open_order'
+    | 'open_order_line'
     | 'new_customer'
     | 'schedule_order_coverage'
     | 'schedule_order_coverage_line'
@@ -443,6 +453,12 @@ export interface Job {
     | 'pick_related'
     | 'pick_totals'
     | 'pick_stage_total'
+    | 'analyze_production_costs_response'
+    | 'production_cost'
+    | 'production_cost_totals'
+    | 'production_cost_department'
+    | 'production_cost_category'
+    | 'production_cost_department_category'
     | null;
 
   /**
@@ -607,6 +623,7 @@ export interface ResponseError {
     | 'missing_field'
     | 'invalid_format'
     | 'method_not_allowed'
+    | 'request_too_large'
     | 'resource_not_found'
     | 'resource_exists'
     | 'resource_conflict'

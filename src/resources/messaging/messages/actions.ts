@@ -106,6 +106,42 @@ export class Actions extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Moves a message you scheduled to a new send time, optionally revising what it
+   * says, and returns it.
+   *
+   * The message keeps its id and is sent once, at the new time; the time it had
+   * before no longer applies. You can only reschedule a message you scheduled
+   * yourself, and only until its send time arrives — once it is due, sent or
+   * canceled the request fails.
+   *
+   * This endpoint requires the permission: `messaging:update`.
+   *
+   * @example
+   * ```ts
+   * const message =
+   *   await client.messaging.messages.actions.reschedule(
+   *     'mg_fdny8633ebgw',
+   *     {
+   *       scheduled_at: '2026-03-02T14:00:00Z',
+   *       body: 'Reminder: the line goes down for maintenance at 6pm.',
+   *     },
+   *   );
+   * ```
+   */
+  reschedule(
+    id: string,
+    params: ActionRescheduleParams,
+    options?: RequestOptions,
+  ): APIPromise<ConversationsAPI.Message> {
+    const { include, ...body } = params;
+    return this._client.post(path`/v1/messaging/messages/${id}/actions/reschedule`, {
+      query: { include },
+      body,
+      ...options,
+    });
+  }
 }
 
 /**
@@ -116,6 +152,23 @@ export interface ApproveSendDraftRequest {
    * A unique client-generated key for this approval, such as a UUID.
    */
   client_message_id: string;
+}
+
+/**
+ * Request to move a scheduled message to a new send time.
+ */
+export interface RescheduleMessageRequest {
+  /**
+   * When the message should now be sent. Must be in the future.
+   */
+  scheduled_at: string;
+
+  /**
+   * The revised message body, replacing what it said before.
+   *
+   * Leaving it out keeps the current body.
+   */
+  body?: string;
 }
 
 export interface ActionApproveSendParams {
@@ -189,11 +242,47 @@ export interface ActionCancelParams {
   >;
 }
 
+export interface ActionRescheduleParams {
+  /**
+   * Body param: When the message should now be sent. Must be in the future.
+   */
+  scheduled_at: string;
+
+  /**
+   * Query param: Sub-objects to expand in the response. When omitted, sub-objects
+   * are returned as `null`.
+   */
+  include?: Array<
+    | 'sender'
+    | 'author'
+    | 'resource'
+    | 'attachments'
+    | 'attachments.resource'
+    | 'conversation'
+    | 'conversation.participants'
+    | 'conversation.last_message'
+    | 'reply_to'
+    | 'reply_to.sender'
+    | 'reply_to.author'
+    | 'reply_to.attachments'
+    | 'agent_run'
+  >;
+
+  /**
+   * Body param: The revised message body, replacing what it said before.
+   *
+   * Leaving it out keeps the current body.
+   */
+  body?: string;
+}
+
 export declare namespace Actions {
   export {
     type ApproveSendDraftRequest as ApproveSendDraftRequest,
+    type RescheduleMessageRequest as RescheduleMessageRequest,
     type ActionApproveSendParams as ActionApproveSendParams,
     type ActionRejectParams as ActionRejectParams,
     type ActionCancelParams as ActionCancelParams,
+    type ActionRescheduleParams as ActionRescheduleParams,
   };
 }

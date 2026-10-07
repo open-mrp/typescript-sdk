@@ -6,7 +6,13 @@ import * as APIKeysAPI from '../../auth/api-keys/api-keys';
 import * as ItemsAPI from '../../catalog/items/items';
 import * as MaterialsAPI from '../../catalog/materials/materials';
 import * as ActionsAPI from './actions';
-import { ActionExportParams, Actions, FileDownload } from './actions';
+import {
+  ActionExportParams,
+  ActionStartExportParams,
+  Actions,
+  FileDownload,
+  StartInventoryChangeLogsExportRequest,
+} from './actions';
 import { APIPromise } from '../../../core/api-promise';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
@@ -238,6 +244,8 @@ export declare namespace InventoryChangeLogs {
   export {
     Actions as Actions,
     type FileDownload as FileDownload,
+    type StartInventoryChangeLogsExportRequest as StartInventoryChangeLogsExportRequest,
     type ActionExportParams as ActionExportParams,
+    type ActionStartExportParams as ActionStartExportParams,
   };
 }

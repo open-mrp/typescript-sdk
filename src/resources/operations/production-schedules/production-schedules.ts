@@ -879,6 +879,9 @@ export interface ProductionSchedule {
   /**
    * The planning assumptions used, frozen at generation so the plan stays
    * explainable after settings change.
+   *
+   * A cost among them, such as `changeover_labor_rate`, is null unless the caller
+   * holds `costs:read`; customer and supplier portal users never see it.
    */
   settings_snapshot: { [key: string]: unknown };
 
@@ -1493,8 +1496,11 @@ export interface ProductionScheduleItemPolicy {
 
   /**
    * Annual cost of holding one unit.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  holding_cost: number;
+  holding_cost: number | null;
 
   /**
    * Entity is a polymorphic reference to any resource in the system.
@@ -1595,8 +1601,11 @@ export interface ProductionScheduleItemPolicy {
 
   /**
    * Cost of one changeover.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  setup_cost: number;
+  setup_cost: number | null;
 
   /**
    * Summed weekly variability of the finished goods this item becomes.
@@ -1629,8 +1638,11 @@ export interface ProductionScheduleItemPolicy {
 
   /**
    * Standard cost per unit.
+   *
+   * Null unless the caller holds `costs:read`; customer and supplier portal users
+   * never see it.
    */
-  unit_cost: number;
+  unit_cost: number | null;
 
   /**
    * Last updated timestamp.

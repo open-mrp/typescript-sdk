@@ -34,4 +34,32 @@ describe('resource actions', () => {
       ),
     ).rejects.toThrow(OpenMRP.NotFoundError);
   });
+
+  test('startExport', async () => {
+    const responsePromise = client.operations.inventoryChangeLogs.actions.startExport();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('startExport: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.operations.inventoryChangeLogs.actions.startExport(
+        {
+          include: ['created_by'],
+          action_types: ['scan'],
+          changed_by_user_ids: ['string'],
+          ends_at: '2026-03-31T00:00:00Z',
+          item_ids: ['string'],
+          starts_at: '2026-01-01T00:00:00Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(OpenMRP.NotFoundError);
+  });
 });

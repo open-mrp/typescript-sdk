@@ -16,8 +16,11 @@ export class ServiceLevels extends APIResource {
    * Use this rather than the `service_levels` field on the carrier itself when a
    * carrier has more than a handful of services, since that inline list is capped.
    *
-   * This endpoint requires the permissions: `carriers:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `carriers:read`.
    *
    * @example
    * ```ts
@@ -38,8 +41,11 @@ export class ServiceLevels extends APIResource {
   /**
    * Returns a service level by ID.
    *
-   * This endpoint requires the permissions: `carriers:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `carriers:read`.
    *
    * @example
    * ```ts

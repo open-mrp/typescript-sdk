@@ -30,8 +30,11 @@ export class Parts extends APIResource {
    * the parts whose SKU matches it most closely are returned first, ordered by
    * creation time within each level of match.
    *
-   * This endpoint requires the permissions: `parts:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `parts:read`.
    *
    * @example
    * ```ts
@@ -45,8 +48,11 @@ export class Parts extends APIResource {
   /**
    * Returns a part by ID.
    *
-   * This endpoint requires the permissions: `parts:read`, `customers:read`,
-   * `suppliers:read`.
+   * Acting in a customer's account requires `customers:read`, and acting in a
+   * supplier's account requires `suppliers:read`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `parts:read`.
    *
    * @example
    * ```ts
@@ -69,8 +75,11 @@ export class Parts extends APIResource {
    * Inventory tracking for the new part starts at a zero on-hand quantity in the
    * category's base unit.
    *
-   * This endpoint requires the permissions: `parts:create`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `parts:create`.
    *
    * @example
    * ```ts
@@ -102,18 +111,22 @@ export class Parts extends APIResource {
   /**
    * Partially updates a part.
    *
-   * Fields not provided retain their current values. Only the SKU, description, and
-   * notes are editable here; the part's category and attributes are changed through
-   * the item endpoints.
+   * Fields not provided retain their current values. The SKU, description, notes,
+   * and category are editable here; the part's attributes are changed through the
+   * item endpoints.
    *
-   * This endpoint requires the permissions: `parts:update`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `parts:update`.
    *
    * @example
    * ```ts
    * const part = await client.catalog.parts.update(
    *   'pt_coba9fgvd84c',
    *   {
+   *     category_id: 'ic_d06g9c6yc9ck',
    *     description: 'Deep groove ball bearing, 20x47x14mm',
    *     notes:
    *       'Superseded by low-friction variant; keep for legacy assemblies.',
@@ -138,8 +151,11 @@ export class Parts extends APIResource {
    * other endpoints, but the record is retained. Deleting an already-deleted part
    * returns an error.
    *
-   * This endpoint requires the permissions: `parts:delete`, `customers:update`,
-   * `suppliers:update`.
+   * Acting in a customer's account requires `customers:update`, and acting in a
+   * supplier's account requires `suppliers:update`, instead of the permission this
+   * endpoint requires in your own account.
+   *
+   * This endpoint requires the permission: `parts:delete`.
    *
    * @example
    * ```ts
@@ -274,6 +290,16 @@ export interface Part {
  * Request to partially update a part.
  */
 export interface UpdatePartRequest {
+  /**
+   * ID of the item category to move the part to.
+   *
+   * The move is the one Change Item Category makes: the category has to be a product
+   * category and has to carry the properties of every attribute the part already
+   * has, and the part's rate units switch to the category's base unit while their
+   * numbers stay as they were. It is applied before the other fields in the request.
+   */
+  category_id?: string;
+
   /**
    * New free-form description of the part.
    */
@@ -438,6 +464,16 @@ export interface PartUpdateParams {
   include?: Array<
     'item' | 'item.category' | 'item.unit_value' | 'item.unit_cost' | 'item.burn_rate' | 'item.attributes'
   >;
+
+  /**
+   * Body param: ID of the item category to move the part to.
+   *
+   * The move is the one Change Item Category makes: the category has to be a product
+   * category and has to carry the properties of every attribute the part already
+   * has, and the part's rate units switch to the category's base unit while their
+   * numbers stay as they were. It is applied before the other fields in the request.
+   */
+  category_id?: string;
 
   /**
    * Body param: New free-form description of the part.
