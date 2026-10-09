@@ -206,6 +206,8 @@ export interface Job {
     | 'adjustment_type'
     | 'account_branding'
     | 'account_portal'
+    | 'document_setting'
+    | 'document_control'
     | 'account_logo_url'
     | 'account_favicon_url'
     | 'public_account'
