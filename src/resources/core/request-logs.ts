@@ -314,7 +314,7 @@ export interface RequestLog {
    * The JSON body the request was sent with.
    *
    * Sensitive values such as passwords, tokens, and secrets are redacted before the
-   * body is stored. Bodies larger than 256 KB are not stored in full; a small marker
+   * body is stored. Bodies larger than 8 MiB are not stored in full; a small marker
    * object with `_truncated` set to `true` is stored in their place. Encoded as a
    * JSON value (object, array, string, number, boolean, or null), not a JSON-encoded
    * string.
@@ -325,7 +325,7 @@ export interface RequestLog {
    * The JSON body OpenMRP responded with.
    *
    * Sensitive values such as generated API key secrets are redacted before the body
-   * is stored. Bodies larger than 256 KB are not stored in full; a small marker
+   * is stored. Bodies larger than 8 MiB are not stored in full; a small marker
    * object with `_truncated` set to `true` is stored in their place. Encoded as a
    * JSON value (object, array, string, number, boolean, or null), not a JSON-encoded
    * string.
