@@ -14,6 +14,9 @@ export class Actions extends APIResource {
    * matched by name (case-insensitive), then writes asynchronously — 202 with a job
    * to poll.
    *
+   * This endpoint requires the permissions: `properties:create` and
+   * `properties:update`.
+   *
    * @example
    * ```ts
    * const job =

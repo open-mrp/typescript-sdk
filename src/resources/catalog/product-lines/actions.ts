@@ -14,6 +14,9 @@ export class Actions extends APIResource {
    * Creates or updates multiple product lines for the account, matched by name
    * (case-insensitive), then writes asynchronously — 202 with a job to poll.
    *
+   * This endpoint requires the permissions: `product_lines:create` and
+   * `product_lines:update`.
+   *
    * @example
    * ```ts
    * const job =

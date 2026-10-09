@@ -31,6 +31,7 @@ describe('resource agents', () => {
       config: {
         endpoint_tool_review: { foo: true },
         endpoint_tool_slugs: ['string'],
+        max_steps: 0,
         system_prompt: 'You are an order processing agent. Parse incoming emails and create draft orders.',
         temperature: 0.2,
         tier: 'high',
@@ -130,6 +131,7 @@ describe('resource agents', () => {
           config: {
             endpoint_tool_review: { foo: true },
             endpoint_tool_slugs: ['string'],
+            max_steps: 0,
             system_prompt:
               'You are an order processing agent. Parse incoming emails and create draft orders.',
             temperature: 0.2,

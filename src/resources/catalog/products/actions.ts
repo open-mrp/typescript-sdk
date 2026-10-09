@@ -17,6 +17,8 @@ export class Actions extends APIResource {
    *
    * At most 1,000 products and an 8 MB request body per call.
    *
+   * This endpoint requires the permissions: `items:create` and `items:update`.
+   *
    * @example
    * ```ts
    * const job =

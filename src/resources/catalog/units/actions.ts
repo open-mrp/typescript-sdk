@@ -13,6 +13,8 @@ export class Actions extends APIResource {
    * Creates or updates multiple units of measure for the account, matched by name or
    * abbreviation, then writes asynchronously — 202 with a job to poll.
    *
+   * This endpoint requires the permissions: `units:create` and `units:update`.
+   *
    * @example
    * ```ts
    * const job = await client.catalog.units.actions.bulkUpsert({

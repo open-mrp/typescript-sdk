@@ -17,6 +17,9 @@ export class Actions extends APIResource {
    *
    * At most 1,000 materials and an 8 MB request body per call.
    *
+   * This endpoint requires the permissions: `materials:create` and
+   * `materials:update`.
+   *
    * @example
    * ```ts
    * const job =

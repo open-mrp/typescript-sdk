@@ -72,7 +72,8 @@ export class Runs extends APIResource {
    * regardless of how it is normally triggered, and the resulting run is always
    * recorded with `trigger_type` `manual`.
    *
-   * This endpoint requires the permission: `agent_runs:create`.
+   * This endpoint requires the permissions: `agent_runs:create`, `agents:read` and
+   * `agent_runs:read`.
    *
    * @example
    * ```ts
@@ -203,7 +204,16 @@ export interface AgentAction {
    *   for human approval (not sent).
    * - `send_email`: send an email reply through the conversation's bound inbox.
    */
-  tool: 'create_artifact' | 'read_doc' | 'fetch_url' | 'send_email' | 'draft_reply';
+  tool:
+    | 'create_artifact'
+    | 'read_doc'
+    | 'search_docs'
+    | 'describe_api_operation'
+    | 'search_source'
+    | 'read_source'
+    | 'fetch_url'
+    | 'send_email'
+    | 'draft_reply';
 
   /**
    * When this action was last updated.

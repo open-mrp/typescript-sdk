@@ -15,6 +15,9 @@ export class Actions extends APIResource {
    * Creates or updates multiple locations for the account, matched by name
    * (case-insensitive), then writes asynchronously — 202 with a job to poll.
    *
+   * This endpoint requires the permissions: `locations:create` and
+   * `locations:update`.
+   *
    * @example
    * ```ts
    * const job =

@@ -305,6 +305,16 @@ export interface AgentDefinitionConfig {
   endpoint_tool_slugs: Array<string>;
 
   /**
+   * Maximum model calls the agent may make in one turn before it must stop and
+   * summarize.
+   *
+   * When the limit is reached, tools are disabled and the agent answers with what it
+   * accomplished, what remains, and what it is missing. `null` means the default: 30
+   * for chat and manual runs, 40 for scheduled and event-driven runs.
+   */
+  max_steps: number | null;
+
+  /**
    * Resource type identifier.
    */
   object: 'agent_definition_config';
@@ -432,6 +442,16 @@ export interface ConfigInput {
   endpoint_tool_slugs?: Array<string>;
 
   /**
+   * Maximum model calls the agent may make in one turn before it must stop and
+   * summarize, from 1 to 60.
+   *
+   * When the limit is reached, tools are disabled and the agent answers with what it
+   * accomplished, what remains, and what it is missing. Omit to use the default: 30
+   * for chat and manual runs, 40 for scheduled and event-driven runs.
+   */
+  max_steps?: number;
+
+  /**
    * Instructions that define the agent's role and how it should behave.
    *
    * Sent to the model on every turn of a run, alongside the platform guidance
@@ -532,6 +552,10 @@ export interface CreateAgentRequest {
    * Every API call the agent makes is authorized against this role, so it bounds
    * what the agent can see and change. An agent created without a role cannot
    * execute — its runs fail immediately — so attach one before triggering it.
+   *
+   * Unless you are an admin, the role may grant only permissions you hold yourself
+   * and may not be an admin role; otherwise the request fails with a `403` on
+   * `role_id`.
    */
   role_id?: string;
 
@@ -607,7 +631,16 @@ export interface ToolInput {
    * `config.endpoint_tool_slugs`. The List Tools endpoint (`GET /v1/ai/tools`)
    * returns both kinds, with API-endpoint tools in the `api_endpoint` category.
    */
-  tool: 'create_artifact' | 'read_doc' | 'fetch_url' | 'send_email' | 'draft_reply';
+  tool:
+    | 'create_artifact'
+    | 'read_doc'
+    | 'search_docs'
+    | 'describe_api_operation'
+    | 'search_source'
+    | 'read_source'
+    | 'fetch_url'
+    | 'send_email'
+    | 'draft_reply';
 
   /**
    * JSON-encoded configuration for this tool instance.
@@ -723,6 +756,11 @@ export interface UpdateAgentRequest {
    *
    * Send `null` to detach the role; omit to leave it unchanged. An agent with no
    * role cannot execute, so detaching the role makes its runs fail immediately.
+   *
+   * Unless you are an admin, the role the agent ends up with — the one you send, or
+   * its current role when you omit this — may grant only permissions you hold
+   * yourself and may not be an admin role; otherwise the request fails with a `403`
+   * on `role_id`.
    */
   role_id?: string | null;
 
@@ -817,6 +855,10 @@ export interface AgentCreateParams {
    * Every API call the agent makes is authorized against this role, so it bounds
    * what the agent can see and change. An agent created without a role cannot
    * execute — its runs fail immediately — so attach one before triggering it.
+   *
+   * Unless you are an admin, the role may grant only permissions you hold yourself
+   * and may not be an admin role; otherwise the request fails with a `403` on
+   * `role_id`.
    */
   role_id?: string;
 
@@ -915,6 +957,11 @@ export interface AgentUpdateParams {
    *
    * Send `null` to detach the role; omit to leave it unchanged. An agent with no
    * role cannot execute, so detaching the role makes its runs fail immediately.
+   *
+   * Unless you are an admin, the role the agent ends up with — the one you send, or
+   * its current role when you omit this — may grant only permissions you hold
+   * yourself and may not be an admin role; otherwise the request fails with a `403`
+   * on `role_id`.
    */
   role_id?: string | null;
 

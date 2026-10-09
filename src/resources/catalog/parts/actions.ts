@@ -17,6 +17,8 @@ export class Actions extends APIResource {
    *
    * At most 1,000 parts and an 8 MB request body per call.
    *
+   * This endpoint requires the permissions: `parts:create` and `parts:update`.
+   *
    * @example
    * ```ts
    * const job = await client.catalog.parts.actions.bulkUpsert({
