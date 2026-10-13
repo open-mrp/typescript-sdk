@@ -32,6 +32,7 @@ describe('resource picks', () => {
           limit: 0,
           product_line_ids: ['string'],
           q: 'q',
+          q_match: 'prefix',
           sort: 'ship_by_date',
           starts_at: 'starts_at',
           status: 'open',

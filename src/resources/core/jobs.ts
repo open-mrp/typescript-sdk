@@ -232,6 +232,7 @@ export interface Job {
     | 'demand_override'
     | 'demand_override_type'
     | 'machine_downtime_reason'
+    | 'machine_item_scan_suggestion'
     | 'production_schedule_preview'
     | 'production_schedule_regenerate_preview'
     | 'production_schedule'
@@ -483,7 +484,7 @@ export interface Job {
   /**
    * The kind of work the job carries out.
    */
-  type: 'bulk_create' | 'bulk_upsert' | 'export' | 'pack_pick';
+  type: 'bulk_create' | 'bulk_upsert' | 'export' | 'pack_pick' | 'ship_shipment';
 
   /**
    * When the job was last updated.

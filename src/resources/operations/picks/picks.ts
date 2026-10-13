@@ -24,9 +24,11 @@ export class Picks extends APIResource {
   /**
    * Returns a paginated list of picks, soonest ship-by date first.
    *
-   * The `q` search term matches the pick number (which is the order number) and the
-   * customer PO number. To narrow by customer, use `customer_ids` rather than
-   * searching for a customer name.
+   * The `q` search term matches the start of the pick number (which is the order
+   * number) and of the customer PO number, ignoring case; send `q_match=contains` to
+   * match anywhere in them. A term of three or more characters also matches anywhere
+   * in the customer's name and customer number. To narrow by customer, use
+   * `customer_ids` rather than searching for a customer name.
    *
    * Acting in a customer's account requires `customers:read`, and acting in a
    * supplier's account requires `suppliers:read`, instead of the permission this
@@ -432,6 +434,20 @@ export interface PickListParams {
    * Which fields are matched against the term varies by endpoint.
    */
   q?: string;
+
+  /**
+   * How `q` is matched against the pick number and the customer PO number. Defaults
+   * to `prefix`.
+   *
+   * - `prefix`: `q` matches the start of the pick number and of the customer PO
+   *   number.
+   * - `contains`: `q` matches anywhere in the pick number and the customer PO
+   *   number. Slower on accounts with many picks.
+   *
+   * A `q` of one or two characters matches the start of the pick number only,
+   * whichever mode is sent.
+   */
+  q_match?: 'prefix' | 'contains';
 
   /**
    * Orders the results: `ship_by_date` puts the soonest delivery commitment first,

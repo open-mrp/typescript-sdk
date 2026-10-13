@@ -1965,6 +1965,14 @@ export interface ScheduleDiagnostics {
   changeover_slope_minutes: number;
 
   /**
+   * Distinct SKUs the participating machines are configured to run.
+   *
+   * Zero with machines present means the plan is empty because runnable SKUs have
+   * not been set up yet.
+   */
+  configured_item_count: number;
+
+  /**
    * Machines the constraint department contributed to this solve.
    */
   constraint_machine_count: number;
@@ -2034,10 +2042,8 @@ export interface ScheduleDiagnostics {
   make_to_order_item_count: number;
 
   /**
-   * Batches found on those machines in the demand window.
-   *
-   * Zero means nothing has been scanned there, which is why a plan can be empty even
-   * with machines configured.
+   * Batches found on those machines in the demand window, used for run rates and
+   * costs.
    */
   measured_batch_count: number;
 
