@@ -56,8 +56,7 @@ export class Sandboxes extends APIResource {
    * Creates a sandbox account owned by your production account.
    *
    * The creating user is added to the new sandbox as an administrator, so it can be
-   * switched into right away. When the owner's plan limits how many sandboxes it may
-   * have, the request fails once that limit is reached.
+   * switched into right away.
    *
    * When `mode` is `seeded`, sample data is populated asynchronously and may not be
    * available immediately after the sandbox is created. Sandboxes cannot be created

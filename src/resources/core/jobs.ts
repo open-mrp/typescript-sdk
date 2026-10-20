@@ -145,11 +145,6 @@ export interface Job {
     | 'refresh_token'
     | 'list'
     | 'sandbox'
-    | 'registration_session'
-    | 'pricing_plan'
-    | 'account_plan'
-    | 'plan_change'
-    | 'enterprise_inquiry'
     | 'request_log'
     | 'audit_event'
     | 'audit_field_change'
@@ -308,24 +303,11 @@ export interface Job {
     | 'transaction_method'
     | 'transaction_type'
     | 'transaction_allocation'
-    | 'usage_item'
-    | 'account_usage_response'
-    | 'subscription_info'
-    | 'billing_portal_session_response'
-    | 'switch_plan_response'
-    | 'ensure_billing_customer_response'
-    | 'spending_cap_response'
-    | 'agent_spend_info'
     | 'webhook_response'
     | 'address_suggestion'
     | 'address_components'
     | 'address_details_result'
     | 'validated_address'
-    | 'plan_limit'
-    | 'plan_change_proration'
-    | 'plan_change_line_item'
-    | 'setup_billing_response'
-    | 'confirm_payment_response'
     | 'oauth_response'
     | 'oauth_status_response'
     | 'stripe_publishable_key'
@@ -410,7 +392,6 @@ export interface Job {
     | 'skipped_item_result'
     | 'reconcile_error_result'
     | 'item_trend_point'
-    | 'tenancy_pending_registration'
     | 'invoice_allocation_entry'
     | 'allocation_customer'
     | 'checkout_sales_order'
@@ -581,29 +562,6 @@ export interface ListJobResult {
 }
 
 /**
- * QuotaInfo provides machine-readable details about a plan-imposed resource limit.
- * Included in limit_exceeded errors so clients can display upgrade prompts, usage
- * bars, or implement programmatic retry/backoff logic.
- */
-export interface QuotaInfo {
-  /**
-   * Limit is the maximum number of resources allowed by the current plan.
-   */
-  limit: number;
-
-  /**
-   * ResetAt is the time when the quota resets, if applicable. Nil for static
-   * (non-metered) limits.
-   */
-  reset_at: string | null;
-
-  /**
-   * Used is the number of resources currently consumed.
-   */
-  used: number;
-}
-
-/**
  * ResponseError is the JSON-serializable error body returned to API clients. It
  * contains only public information. This struct is used by the OpenAPI schema
  * generator to produce documentation.
@@ -618,8 +576,6 @@ export interface ResponseError {
     | 'api_key_revoked'
     | 'invalid_credentials'
     | 'insufficient_permissions'
-    | 'payment_required'
-    | 'agent_spending_cap_reached'
     | 'validation_failed'
     | 'missing_field'
     | 'invalid_format'
@@ -630,7 +586,6 @@ export interface ResponseError {
     | 'resource_conflict'
     | 'resource_gone'
     | 'idempotency_in_progress'
-    | 'limit_exceeded'
     | 'registration_closed'
     | 'rate_limit_exceeded'
     | 'parameter_missing'
@@ -669,13 +624,6 @@ export interface ResponseError {
   param: string | null;
 
   /**
-   * QuotaInfo provides machine-readable details about a plan-imposed resource limit.
-   * Included in limit_exceeded errors so clients can display upgrade prompts, usage
-   * bars, or implement programmatic retry/backoff logic.
-   */
-  quota: QuotaInfo | null;
-
-  /**
    * RequestLogURL is a link to the dashboard page for this request's log entry. Nil
    * when no request log is available.
    */
@@ -709,7 +657,6 @@ export declare namespace Jobs {
     type JobExport as JobExport,
     type JobResult as JobResult,
     type ListJobResult as ListJobResult,
-    type QuotaInfo as QuotaInfo,
     type ResponseError as ResponseError,
     type JobRetrieveParams as JobRetrieveParams,
     type JobCancelParams as JobCancelParams,

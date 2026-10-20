@@ -80,13 +80,12 @@ export class AccountUsers extends APIResource {
    * a customer account signs in through your customer portal, on its verified custom
    * domain when you have one. If a matching user already exists, that user is added
    * to the account instead, and a user you previously removed is restored rather
-   * than duplicated. Adding a user to your own account consumes a seat and is
-   * rejected once your plan's seat limit is reached.
+   * than duplicated.
    *
    * You can add users to a customer or supplier account only while you manage it
-   * alone: an account that runs its own OpenMRP subscription, or that another
-   * account also has as a customer or supplier, manages its own users, and the
-   * request is refused.
+   * alone: an account that signed up to OpenMRP on its own, or that another account
+   * also has as a customer or supplier, manages its own users, and the request is
+   * refused.
    *
    * Acting in a customer's account requires `customers:create`, and acting in a
    * supplier's account requires `suppliers:create`, instead of the permission this

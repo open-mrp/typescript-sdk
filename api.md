@@ -134,7 +134,6 @@ Types:
 - <code><a href="./src/resources/core/jobs.ts">JobExport</a></code>
 - <code><a href="./src/resources/core/jobs.ts">JobResult</a></code>
 - <code><a href="./src/resources/core/jobs.ts">ListJobResult</a></code>
-- <code><a href="./src/resources/core/jobs.ts">QuotaInfo</a></code>
 - <code><a href="./src/resources/core/jobs.ts">ResponseError</a></code>
 
 Methods:

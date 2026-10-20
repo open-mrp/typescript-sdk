@@ -70,7 +70,6 @@ export {
   type JobExport,
   type JobResult,
   type ListJobResult,
-  type QuotaInfo,
   type ResponseError,
   type JobRetrieveParams,
   type JobCancelParams,

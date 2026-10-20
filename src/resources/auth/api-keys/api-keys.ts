@@ -643,9 +643,9 @@ export interface Role {
    * The type gates behavior that individual permissions do not cover, and some
    * actions are reserved for a single role type.
    *
-   * - `admin`: full administrative access. Sensitive areas such as API keys,
-   *   billing, and third-party integrations are restricted to admins no matter what
-   *   permissions another role holds.
+   * - `admin`: full administrative access. Sensitive areas such as API keys and
+   *   third-party integrations are restricted to admins no matter what permissions
+   *   another role holds.
    * - `user`: a custom role tailored to a specific need, with its permissions
    *   defined explicitly. Roles created through the API always have this type.
    * - `scanner`: the role used by shop-floor scanning stations, assigned

@@ -60,7 +60,6 @@ import {
   JobRetrieveParams,
   Jobs,
   ListJobResult,
-  QuotaInfo,
   ResponseError,
 } from './jobs';
 import * as RequestLogsAPI from './request-logs';
@@ -190,11 +189,6 @@ export interface Entity {
     | 'refresh_token'
     | 'list'
     | 'sandbox'
-    | 'registration_session'
-    | 'pricing_plan'
-    | 'account_plan'
-    | 'plan_change'
-    | 'enterprise_inquiry'
     | 'request_log'
     | 'audit_event'
     | 'audit_field_change'
@@ -353,24 +347,11 @@ export interface Entity {
     | 'transaction_method'
     | 'transaction_type'
     | 'transaction_allocation'
-    | 'usage_item'
-    | 'account_usage_response'
-    | 'subscription_info'
-    | 'billing_portal_session_response'
-    | 'switch_plan_response'
-    | 'ensure_billing_customer_response'
-    | 'spending_cap_response'
-    | 'agent_spend_info'
     | 'webhook_response'
     | 'address_suggestion'
     | 'address_components'
     | 'address_details_result'
     | 'validated_address'
-    | 'plan_limit'
-    | 'plan_change_proration'
-    | 'plan_change_line_item'
-    | 'setup_billing_response'
-    | 'confirm_payment_response'
     | 'oauth_response'
     | 'oauth_status_response'
     | 'stripe_publishable_key'
@@ -455,7 +436,6 @@ export interface Entity {
     | 'skipped_item_result'
     | 'reconcile_error_result'
     | 'item_trend_point'
-    | 'tenancy_pending_registration'
     | 'invoice_allocation_entry'
     | 'allocation_customer'
     | 'checkout_sales_order'
@@ -595,11 +575,6 @@ export interface CoreRetrieveSearchParams {
     | 'refresh_token'
     | 'list'
     | 'sandbox'
-    | 'registration_session'
-    | 'pricing_plan'
-    | 'account_plan'
-    | 'plan_change'
-    | 'enterprise_inquiry'
     | 'request_log'
     | 'audit_event'
     | 'audit_field_change'
@@ -758,24 +733,11 @@ export interface CoreRetrieveSearchParams {
     | 'transaction_method'
     | 'transaction_type'
     | 'transaction_allocation'
-    | 'usage_item'
-    | 'account_usage_response'
-    | 'subscription_info'
-    | 'billing_portal_session_response'
-    | 'switch_plan_response'
-    | 'ensure_billing_customer_response'
-    | 'spending_cap_response'
-    | 'agent_spend_info'
     | 'webhook_response'
     | 'address_suggestion'
     | 'address_components'
     | 'address_details_result'
     | 'validated_address'
-    | 'plan_limit'
-    | 'plan_change_proration'
-    | 'plan_change_line_item'
-    | 'setup_billing_response'
-    | 'confirm_payment_response'
     | 'oauth_response'
     | 'oauth_status_response'
     | 'stripe_publishable_key'
@@ -860,7 +822,6 @@ export interface CoreRetrieveSearchParams {
     | 'skipped_item_result'
     | 'reconcile_error_result'
     | 'item_trend_point'
-    | 'tenancy_pending_registration'
     | 'invoice_allocation_entry'
     | 'allocation_customer'
     | 'checkout_sales_order'
@@ -981,7 +942,6 @@ export declare namespace Core {
     type JobExport as JobExport,
     type JobResult as JobResult,
     type ListJobResult as ListJobResult,
-    type QuotaInfo as QuotaInfo,
     type ResponseError as ResponseError,
     type JobRetrieveParams as JobRetrieveParams,
     type JobCancelParams as JobCancelParams,
