@@ -55,6 +55,7 @@ describe('resource integrations', () => {
         '{"private_key":"sk_test_...","publishable_key":"pk_test_...","webhook_secret":"whsec_..."}',
       name: 'My Stripe Integration',
       provider: 'stripe',
+      monthly_spend_limit: { amount: 'amount', currency: 'currency' },
     });
   });
 
@@ -74,7 +75,11 @@ describe('resource integrations', () => {
     await expect(
       client.settings.integrations.update(
         'acig_5ilahyezrs63',
-        { name: 'Updated Stripe Integration', status: 'active' },
+        {
+          monthly_spend_limit: { amount: 'amount', currency: 'currency' },
+          name: 'Updated Stripe Integration',
+          status: 'active',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(OpenMRP.NotFoundError);

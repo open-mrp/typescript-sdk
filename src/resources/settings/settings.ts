@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
-import * as IntegrationsAPI from './integrations';
+import * as IntegrationsAPI from './integrations/integrations';
 import {
   AccountIntegration,
   CreateAccountIntegrationRequest,
@@ -10,8 +10,10 @@ import {
   IntegrationUpdateParams,
   Integrations,
   ListAccountIntegration,
+  Money,
+  MoneyInput,
   UpdateAccountIntegrationRequest,
-} from './integrations';
+} from './integrations/integrations';
 import * as PortalDomainsAPI from './portal-domains/portal-domains';
 import {
   CreatePortalDomainRequest,
@@ -49,6 +51,8 @@ export declare namespace Settings {
     type AccountIntegration as AccountIntegration,
     type CreateAccountIntegrationRequest as CreateAccountIntegrationRequest,
     type ListAccountIntegration as ListAccountIntegration,
+    type Money as Money,
+    type MoneyInput as MoneyInput,
     type UpdateAccountIntegrationRequest as UpdateAccountIntegrationRequest,
     type IntegrationListParams as IntegrationListParams,
     type IntegrationCreateParams as IntegrationCreateParams,

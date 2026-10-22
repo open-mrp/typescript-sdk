@@ -495,6 +495,7 @@ const fuse = new Fuse(
     'client.settings.integrations.delete',
     'client.settings.integrations.list',
     'client.settings.integrations.update',
+    'client.settings.integrations.openrouter.retrieveUsage',
   ],
   { threshold: 1, shouldSort: true },
 );

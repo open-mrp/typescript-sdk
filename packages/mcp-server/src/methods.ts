@@ -2332,6 +2332,12 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'delete',
     httpPath: '/v1/settings/integrations/{id}',
   },
+  {
+    clientCallName: 'client.settings.integrations.openrouter.retrieveUsage',
+    fullyQualifiedName: 'settings.integrations.openrouter.retrieveUsage',
+    httpMethod: 'get',
+    httpPath: '/v1/settings/integrations/openrouter/usage',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {

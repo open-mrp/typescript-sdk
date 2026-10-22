@@ -5,11 +5,13 @@ export {
   type AccountIntegration,
   type CreateAccountIntegrationRequest,
   type ListAccountIntegration,
+  type Money,
+  type MoneyInput,
   type UpdateAccountIntegrationRequest,
   type IntegrationListParams,
   type IntegrationCreateParams,
   type IntegrationUpdateParams,
-} from './integrations';
+} from './integrations/index';
 export {
   PortalDomains,
   type CreatePortalDomainRequest,

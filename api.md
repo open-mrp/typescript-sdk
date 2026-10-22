@@ -1875,14 +1875,26 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/settings/integrations.ts">AccountIntegration</a></code>
-- <code><a href="./src/resources/settings/integrations.ts">CreateAccountIntegrationRequest</a></code>
-- <code><a href="./src/resources/settings/integrations.ts">ListAccountIntegration</a></code>
-- <code><a href="./src/resources/settings/integrations.ts">UpdateAccountIntegrationRequest</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">AccountIntegration</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">CreateAccountIntegrationRequest</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">ListAccountIntegration</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">Money</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">MoneyInput</a></code>
+- <code><a href="./src/resources/settings/integrations/integrations.ts">UpdateAccountIntegrationRequest</a></code>
 
 Methods:
 
-- <code title="get /v1/settings/integrations">client.settings.integrations.<a href="./src/resources/settings/integrations.ts">list</a>({ ...params }) -> ListAccountIntegration</code>
-- <code title="post /v1/settings/integrations">client.settings.integrations.<a href="./src/resources/settings/integrations.ts">create</a>({ ...params }) -> AccountIntegration</code>
-- <code title="put /v1/settings/integrations/{id}">client.settings.integrations.<a href="./src/resources/settings/integrations.ts">update</a>(id, { ...params }) -> AccountIntegration</code>
-- <code title="delete /v1/settings/integrations/{id}">client.settings.integrations.<a href="./src/resources/settings/integrations.ts">delete</a>(id) -> AccountIntegration</code>
+- <code title="get /v1/settings/integrations">client.settings.integrations.<a href="./src/resources/settings/integrations/integrations.ts">list</a>({ ...params }) -> ListAccountIntegration</code>
+- <code title="post /v1/settings/integrations">client.settings.integrations.<a href="./src/resources/settings/integrations/integrations.ts">create</a>({ ...params }) -> AccountIntegration</code>
+- <code title="put /v1/settings/integrations/{id}">client.settings.integrations.<a href="./src/resources/settings/integrations/integrations.ts">update</a>(id, { ...params }) -> AccountIntegration</code>
+- <code title="delete /v1/settings/integrations/{id}">client.settings.integrations.<a href="./src/resources/settings/integrations/integrations.ts">delete</a>(id) -> AccountIntegration</code>
+
+### Openrouter
+
+Types:
+
+- <code><a href="./src/resources/settings/integrations/openrouter.ts">OpenRouterUsage</a></code>
+
+Methods:
+
+- <code title="get /v1/settings/integrations/openrouter/usage">client.settings.integrations.openrouter.<a href="./src/resources/settings/integrations/openrouter.ts">retrieveUsage</a>() -> OpenRouterUsage</code>

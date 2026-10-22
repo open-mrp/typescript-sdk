@@ -312,6 +312,7 @@ export interface Job {
     | 'oauth_status_response'
     | 'stripe_publishable_key'
     | 'stripe_status'
+    | 'openrouter_usage'
     | 'healthcheck'
     | 'agent_definition_config'
     | 'trigger_config'
