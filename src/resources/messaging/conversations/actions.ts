@@ -195,7 +195,8 @@ export class Actions extends APIResource {
    *
    * The caller stays a member and keeps receiving notifications; the conversation
    * simply stops appearing in their list until they unhide it, and new messages do
-   * not bring it back on their own. The owner of a conversation cannot hide it.
+   * not bring it back on their own. Any participant can hide a conversation,
+   * including its owner.
    *
    * This endpoint requires the permission: `messaging:update`.
    *
