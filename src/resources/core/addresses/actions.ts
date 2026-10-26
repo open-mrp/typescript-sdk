@@ -104,12 +104,12 @@ export interface ValidateAddressRequest {
   country: string;
 
   /**
-   * Postal or ZIP code.
+   * Postal or ZIP code. Empty for an address without one.
    */
   postal_code: string;
 
   /**
-   * State or administrative area.
+   * State or administrative area. Empty for an address without one.
    */
   state: string;
 
@@ -185,12 +185,12 @@ export interface ActionValidateParams {
   country: string;
 
   /**
-   * Postal or ZIP code.
+   * Postal or ZIP code. Empty for an address without one.
    */
   postal_code: string;
 
   /**
-   * State or administrative area.
+   * State or administrative area. Empty for an address without one.
    */
   state: string;
 

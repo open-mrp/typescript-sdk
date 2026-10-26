@@ -282,9 +282,9 @@ export interface UpdateAddressRequest {
   /**
    * Postal or ZIP code.
    *
-   * Send an empty string to clear.
+   * Send `null` or an empty string to clear.
    */
-  postal_code?: string;
+  postal_code?: string | null;
 
   /**
    * The operating calendar naming the days this dock accepts freight, overriding the
@@ -295,9 +295,9 @@ export interface UpdateAddressRequest {
   /**
    * State or administrative area.
    *
-   * Send an empty string to clear.
+   * Send `null` or an empty string to clear.
    */
-  state?: string;
+  state?: string | null;
 
   /**
    * First line of the street address.
@@ -446,9 +446,9 @@ export interface AddressUpdateParams {
   /**
    * Postal or ZIP code.
    *
-   * Send an empty string to clear.
+   * Send `null` or an empty string to clear.
    */
-  postal_code?: string;
+  postal_code?: string | null;
 
   /**
    * The operating calendar naming the days this dock accepts freight, overriding the
@@ -459,9 +459,9 @@ export interface AddressUpdateParams {
   /**
    * State or administrative area.
    *
-   * Send an empty string to clear.
+   * Send `null` or an empty string to clear.
    */
-  state?: string;
+  state?: string | null;
 
   /**
    * First line of the street address.
