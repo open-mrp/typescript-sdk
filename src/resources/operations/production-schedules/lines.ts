@@ -419,6 +419,11 @@ export interface UpdateProductionScheduleLineRequest {
 
   /**
    * ID of the machine to move the campaign to.
+   *
+   * The campaign takes on that machine's production step, so a release issues its
+   * batches on the step the new machine runs. Batches already released for the
+   * campaign move to the new machine with it, and the moved campaign is kept on that
+   * machine when the version is regenerated with `preserve_manual`.
    */
   machine_id?: string;
 
@@ -583,6 +588,11 @@ export interface LineUpdateParams {
 
   /**
    * Body param: ID of the machine to move the campaign to.
+   *
+   * The campaign takes on that machine's production step, so a release issues its
+   * batches on the step the new machine runs. Batches already released for the
+   * campaign move to the new machine with it, and the moved campaign is kept on that
+   * machine when the version is regenerated with `preserve_manual`.
    */
   machine_id?: string;
 
