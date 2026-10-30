@@ -373,6 +373,7 @@ export interface Job {
     | 'sys_property_type'
     | 'sys_property_value'
     | 'territory'
+    | 'feedback_report'
     | 'tenancy'
     | 'checkout_session'
     | 'estimate_rate_result'
